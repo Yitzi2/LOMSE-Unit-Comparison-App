@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>LOMSE Unit Comparison</title>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <link href="main.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script type="text/javascript" src="app.js"></script>
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+	<script type="text/javascript">
+		google.charts.load('current', {packages: ['corechart']});
+  		google.charts.setOnLoadCallback(setChartsReady);
+	</script>
+</head>
+<body>
+	<div class="tab" data-target="units-page"></div><div class="tab" data-target="properties-page"></div><div class="tab" data-target="graphs-page"></div>
+	<div class="page units-page">
+		<div class="scroll-container">
+			<form class="units-form">
+				<p>Select a unit type to include/exclude it, or click on the colored box to change its color.</p>
+				<p class="line" data-level-dependent-start-row="629" data-level-dependent-end-row="638" data-level-independent-row="109">
+					<input type="color" value="#6C6B69">
+					<input type="checkbox" id="dark-warrior">
+					<label for="dark-warrior">Dark Warrior</label>
+				</p>
+					<p class="line" data-level-dependent-start-row="542" data-level-dependent-end-row="551" data-level-independent-row="94">
+					<input type="color" value="#FFCF00">
+					<input type="checkbox" id="elven-warrior">
+					<label for="elven-warrior">Elven Warrior</label>
+				</p>
+				<p class="line" data-level-dependent-start-row="101" data-level-dependent-end-row="110" data-level-independent-row="18">
+					<input type="color" value="#E7D7A5">
+					<input type="checkbox" id="paladin">
+					<label for="paladin">Paladin</label>
+				</p>
+				<p class="line" data-level-dependent-start-row="281" data-level-dependent-end-row="290" data-level-independent-row="49">
+					<input type="color" value="#CE8631">
+					<input type="checkbox" id="beast-rider">
+					<label for="beast-rider">Beast Rider</label>
+				</p>
+				<p class="line" data-level-dependent-start-row="194" data-level-dependent-end-row="203" data-level-independent-row="34">
+					<input type="color" value="#E72000">
+					<input type="checkbox" id="fire-warrior">
+					<label for="fire-warrior">Fire Warrior</label>
+				</p>
+				<p class="line" data-level-dependent-start-row="14" data-level-dependent-end-row="23" data-level-independent-row="3">
+					<input type="color" value="#0059AD">
+					<input type="checkbox" id="amazon-warrior">
+					<label for="amazon-warrior">Amazon Warrior</label>
+				</p>
+				<p class="line" data-level-dependent-start-row="455" data-level-dependent-end-row="464" data-level-independent-row="79">
+					<input type="color" value="#4A9E10">
+					<input type="checkbox" id="dwarven-warrior">
+					<label for="dwarven-warrior">Dwarven Warrior</label>
+				<p class="line" data-level-dependent-start-row="368" data-level-dependent-end-row="377" data-level-independent-row="64">
+					<input type="color" value="#73BAFF">
+					<input type="checkbox" id="storm-warrior">
+					<label for="storm-warrior">Storm Warrior</label>
+				</p>
+			</form>
+		</div>
+	</div>
+	<div class="page hidden-for-mobile properties-page">
+		<div class="pad-top"></div>
+		<form class="line-graph-form">
+			<h2>Line graphs</h2>
+			<p class="center">
+				Displayed XP range: <input type="number" name="minXP" value="0"> to <input type="number" name="maxXP" value="32000">
+			</p>
+			<div class="flexbox">
+				<div class="unit-property">
+					<input type="radio" name="line-property" id="attack" data-column-letter=D data-level-dependent>
+					<label for="attack">Attack</label>
+				</div>
+				<div class="unit-property">
+					<input type="radio" name="line-property" id="defense" data-column-letter=E data-level-dependent>
+					<label for="defense">Defense</label>
+				</div>
+				<div class="unit-property">
+					<input type="radio" name="line-property" id="hit-points" data-column-letter=F data-level-dependent>
+					<label for="hit-points">Hit Points</label>
+				</div>
+				<!--<div class="unit-property">
+					<input type="radio" name="line-property" id="hit points" data-column-number=6>
+					<label for="hit points">Mana*</label>
+				</div>
+				<div class="unit-property">
+					<input type="radio" name="line-property" id="hit points" data-column-number=6>
+					<label for="hit points">Ranged*</label>
+				</div>
+				<div class="unit-property">
+					<input type="radio" name="line-property" id="hit points" data-column-number=6>
+					<label for="hit points">Level*</label>
+				</div>
+				<div class="unit-property">
+					<input type="radio" name="line-property" id="hit points" data-column-number=6>
+					<label for="hit points">Strength*</label>
+				</div>
+				<div class="unit-property">
+					<input type="radio" name="line-property" id="hit points" data-column-number=6>
+					<label for="hit points">Agility*</label>
+				</div>
+				<div class="unit-property">
+					<input type="radio" name="line-property" id="hit points" data-column-number=6>
+					<label for="hit points">Wisdom*</label>
+				</div>
+				<div class="unit-property">
+					<input type="radio" name="line-property" id="hit points"data-column-number=6>
+					<label for="hit points">Atk Rate</label>
+				</div>
+				<div class="unit-property">
+					<input type="radio" name="line-property" id="hit points" data-column-number=6>
+					<label for="hit points">Hit Recov</label>
+				</div>-->
+				<div class="button-holder"><button type="submit">Create Graph</button></div>
+			</div>
+		</form>
+		<div class="pad-mid"></div>
+		<form class="bar-graph-form">
+			<div class="bar-graph-property-list">
+				<h2>Bar graphs calculated at <input type="number" name="XP" value="0"> XP</h2>
+				<div class="flexbox">
+					<div class="unit-property">
+						<input type="checkbox" id="bar-attack" data-column-letter=D data-level-dependent>
+						<label for="bar-attack">Attack</label>
+					</div>
+					<div class="unit-property">
+						<input type="checkbox"  id="bar-defense" data-column-letter=E data-level-dependent>
+						<label for="bar-defense">Defense</label>
+					</div>
+					<div class="unit-property">
+						<input type="checkbox" id="bar-hit-points" data-column-letter=F data-level-dependent>
+						<label for="bar-hit-points">Hit Points</label>
+					</div>
+					<div class="unit-property">
+						<input type="checkbox" id="movement" data-column-letter=B>
+						<label for="movement">Movement</label>
+					</div>
+					<div class="unit-property">
+						<input type="checkbox" id="combat-speed" data-column-letter=C>
+						<label for="combat-speed">Combat Speed</label>
+					</div>
+				</div>
+			</div>
+			<div class="bar-graph-bottom flexbox">
+				<div class="button-holder">
+					<button type="reset">Reset</button>
+				</div>
+				<div class="button-holder">
+					<button type="submit">Create Graph</button>
+				</div>
+			</div>
+		</form>
+		<div class="pad-bottom"></div>
+	</div>
+	<div class="page hidden-for-mobile charts-page"></div>
+</body>
+</html>

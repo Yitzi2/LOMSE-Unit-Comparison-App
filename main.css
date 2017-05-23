@@ -1,0 +1,131 @@
+html, body, body>div {
+	box-sizing: border-box;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	margin: 0px;
+	height: 100%;
+}
+
+html {
+	overflow: hidden;
+}
+
+.tab {
+	margin: 0px;
+	height: auto;
+}
+
+html {
+	background-color: #EFEFEF;
+}
+
+input[type="color"] {
+	width: 1em;
+	height: 1em;
+	padding: 0px;
+	border: none;
+}
+
+input[type="number"] {
+	width: 55px;
+}
+
+p {
+	margin: 0px;
+	padding: 10px;
+}
+
+.center {
+	text-align: center;
+}
+
+h2 {
+	text-align: center;
+	margin: 0px;
+	padding-top: 5px;
+	padding-bottom: 0px;
+	font-size: 12pt;
+	font-weight: 700;
+}
+
+.units-page {
+	width: 320px;
+	border-right: 2px black solid;
+	float: left;
+	margin-left: 0px;
+	background-color: #BFBFBF;
+	overflow: auto;
+}
+
+.properties-page {
+	width: 320px;
+	border-left: 2px black solid;
+	border-right: 2px black solid;
+	float: right;
+	margin-left: 0px;
+	background-color: #BFBFBF;
+	display: flex;
+	flex-direction: column;
+}
+
+.pad-top {
+	flex: 1;
+}
+
+.pad-mid {
+	flex: 3;
+}
+
+.pad-bottom {
+	flex: 4;
+}
+
+.line-graph-form {
+	border-top: 2px black solid;
+	border-bottom: 2px black solid;
+	box-sizing: border-box;
+}
+
+.bar-graph-form {
+	display: flex;
+	flex-direction: column;
+	overflow: auto;
+	border-top: 2px black solid;
+	border-bottom: 2px black solid;
+}
+
+.charts-page {
+	margin-left: 322px;
+	margin-right: 324px;
+	overflow: auto;
+}
+
+.graph-container {
+	width: 90%;
+	height: 400px;
+}
+
+.flexbox {
+	display: flex;
+	justify-content: space-around;
+	align-items: flex-start;
+	flex-wrap: wrap;
+	align-content: flex-start;
+}
+
+.unit-property, .button-holder {
+	min-width: 33.3333%;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+.button-holder {
+	padding-left: 5px;
+	box-sizing: border-box;
+}
+
+.bar-graph-property-list {
+	border-bottom: 1px black solid;
+	box-sizing: border-box;
+	overflow: auto;
+}
