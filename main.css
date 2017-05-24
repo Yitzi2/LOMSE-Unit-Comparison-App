@@ -20,8 +20,8 @@ html {
 }
 
 input[type="color"] {
-	width: 1em;
-	height: 1em;
+	width: 10pt;
+	height: 10pt;
 	padding: 0px;
 	border: none;
 }
@@ -37,6 +37,34 @@ p {
 
 .center {
 	text-align: center;
+}
+
+.level-2 {
+	margin-left: 10px;
+}
+
+.arrow:before {
+	content: "\25BC";	
+}
+
+.arrow {
+	display: inline-block;
+	height: 20px;
+	width: 16px;
+	line-height: 20px;
+}
+
+.closed-expandable .arrow:before {
+	content: "\25B6";
+}
+
+.closed-expandable .expandable, .closed-expandable .line {
+	display: none;
+}
+
+.line {
+	margin-left: 16px;
+	padding-left: 4px;
 }
 
 h2 {

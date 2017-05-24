@@ -221,12 +221,29 @@ function createGraph(isLineGraph, units, properties, minXP, maxXP)  {
 	$(".charts-page").append(newGraph.container);
 }
 
+function propagateCheckboxes () {
+	let category = $(this).closest(".level-2");
+	let categoryBox = category.children("input[type=checkbox]");
+	let otherBoxes = category.find("input[type=checkbox]").not(categoryBox);
+	if (categoryBox.is(this)) {
+		otherBoxes.prop("checked", $(this).prop("checked"));
+		this.prop("indeterminate", false);
+	}
+	else {
+		if (otherBoxes.is(":checked")) {
+			if (otherBoxes.is(":not(:checked)")) categoryBox.prop("checked", false).prop("indeterminate", true); //Some units are on, some are off.
+			else categoryBox.prop("checked", "true").prop("indeterminate", false); //All are on.
+		}
+		else categoryBox.prop("checked", false).prop("indeterminate", false); //All are off.
+	}
+}
+
 function activateButtons () {
 	$(".line-graph-form").submit (
 		function () {
 			createGraph(
 				true, //isLineGraph
-				$(".units-form input[type=checkbox]:checked").map (
+				$(".units-form .line input[type=checkbox]:checked").map (
 					(i, element) => $(element).parent()
 				), //units
 				$(this).find("input[type=radio]:checked"), //properties
@@ -240,7 +257,7 @@ function activateButtons () {
 		function () {
 			createGraph(
 				false, //isLineGraph
-				$(".units-form input[type=checkbox]:checked").map (
+				$(".units-form .line input[type=checkbox]:checked").map (
 					(i, element) => $(element).parent()[0]
 				), //units
 				$(this).find("input[type=checkbox]:checked"), //properties
@@ -250,6 +267,10 @@ function activateButtons () {
 			return false;
 		}
 	);
+	$(".arrow").click (
+		function () {$(this).parent().toggleClass("closed-expandable");}
+	);
+	$("input[type=checkbox]").change(propagateCheckboxes);
 }
 
 $(activateButtons);
