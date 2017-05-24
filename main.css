@@ -20,14 +20,19 @@ html {
 }
 
 input[type="color"] {
-	width: 10pt;
-	height: 10pt;
+	width: 13px;
+	height: 13px;
 	padding: 0px;
 	border: none;
+	margin-right: 3px;
 }
 
 input[type="number"] {
 	width: 55px;
+}
+
+input[type="checkbox"] {
+	margin-left: 0px;
 }
 
 p, .level-2{
