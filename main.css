@@ -30,17 +30,24 @@ input[type="number"] {
 	width: 55px;
 }
 
-p {
+p, .level-2{
 	margin: 0px;
-	padding: 10px;
+	padding-left: 10px;
+	padding-top: 10px;
 }
 
 .center {
 	text-align: center;
 }
 
+.line {
+	margin-left: 16px;
+	padding-left: 4px;
+}
+
 .level-2 {
 	margin-left: 10px;
+	padding-left: 0px;
 }
 
 .arrow:before {
@@ -60,11 +67,6 @@ p {
 
 .closed-expandable .expandable, .closed-expandable .line {
 	display: none;
-}
-
-.line {
-	margin-left: 16px;
-	padding-left: 4px;
 }
 
 h2 {
