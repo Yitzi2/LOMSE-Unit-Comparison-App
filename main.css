@@ -103,16 +103,21 @@ h2 {
 	flex-direction: column;
 }
 
+.properties-page button[type=reset] {
+	text-align: center;
+	left-margin: 20px;
+}
+
 .pad-top {
 	flex: 1;
 }
 
 .pad-mid {
-	flex: 3;
+	flex: 2;
 }
 
 .pad-bottom {
-	flex: 4;
+	flex: 5;
 }
 
 .line-graph-form {
@@ -149,14 +154,20 @@ h2 {
 }
 
 .unit-property, .button-holder {
-	min-width: 33.3333%;
-	padding-top: 10px;
-	padding-bottom: 10px;
+	min-width: 50%;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	box-sizing: border-box;
+	padding-left: 16px;
 }
 
-.button-holder {
-	padding-left: 5px;
-	box-sizing: border-box;
+
+.pad-left {
+	width: 10%;
+}
+
+.pad-left+.button-holder {
+	min-width: 40%;
 }
 
 .bar-graph-property-list {

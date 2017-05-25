@@ -20,8 +20,8 @@ function checkChartsReady () {
 	return state.chartsReady;
 }
 
-function produceA1 (unit, property) { //either or both parameters can be null.
-	if (unit===null) {
+function produceA1 (unit, property, XP) { //either or both of the first two parameters can be null.
+	if (unit === null) {
 		var minRow = 1;
 		var maxRow = 1;
 		var indepRow = 1;
@@ -30,16 +30,19 @@ function produceA1 (unit, property) { //either or both parameters can be null.
 		const unitData = $(unit).data();
 		var minRow = unitData.levelDependentStartRow;
 		var maxRow = unitData.levelDependentEndRow;
-		var indepRow = unitData.levelIndependentRow;
+		if (unitData.dataSpecialThreshold === undefined || XP < parseInt(unitData.dataSpecialThreshold)) {
+			var indepRow = unitData.levelIndependentRow;
+		}
+		else varindepRow = unitData.specialLevelIndependentRow;
 	}
-	if (property===null) {
+	if (property === null) {
 		var sheet = "Level-dependent";
 		var minColumn = "B";
 		var maxColumn = "C";
 	}
 	else {
 		const propertyData = $(property).data();
-		if (propertyData.levelDependent!==undefined) var sheet = "Level-dependent";
+		if (propertyData.levelDependent !== undefined) var sheet = "Level-dependent";
 		else {
 			var sheet = "Level-independent";
 			minRow = indepRow;
@@ -58,12 +61,12 @@ function assignQueryObject (graphObject) {
 		key:  APIkey
 	};
 	for (let j = 0; j < graphObject.properties.length; ++j) {
-		newQueryObject.ranges.push(produceA1(null, graphObject.properties[j]));
+		newQueryObject.ranges.push(produceA1(null, graphObject.properties[j], graphObject.minXP));
 	}
 	for (let i = 0; i < graphObject.units.length; ++i) {
-		newQueryObject.ranges.push(produceA1(graphObject.units[i], null));
+		newQueryObject.ranges.push(produceA1(graphObject.units[i], null, graphObject.minXP));
 		for (let j = 0; j < graphObject.properties.length; ++j) {
-		newQueryObject.ranges.push(produceA1(graphObject.units[i], graphObject.properties[j]));
+		newQueryObject.ranges.push(produceA1(graphObject.units[i], graphObject.properties[j], graphObject.minXP));
 		}
 	}
 	graphObject.queryObject = newQueryObject;
@@ -227,7 +230,7 @@ function propagateCheckboxes () {
 	let otherBoxes = category.find("input[type=checkbox]").not(categoryBox);
 	if (categoryBox.is(this)) {
 		otherBoxes.prop("checked", $(this).prop("checked"));
-		this.prop("indeterminate", false);
+		$(this).prop("indeterminate", false);
 	}
 	else {
 		if (otherBoxes.is(":checked")) {

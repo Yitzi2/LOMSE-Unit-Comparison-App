@@ -16,106 +16,239 @@
 <body>
 	<div class="tab" data-target="units-page"></div><div class="tab" data-target="properties-page"></div><div class="tab" data-target="graphs-page"></div>
 	<div class="page units-page">
-		<div class="scroll-container">
-			<form class="units-form">
-				<p>Select a unit type to include/exclude it, or click on the colored box to change its color.</p>
-				<div class="level-2 expandable closed-expandable"> 
-					<span class="arrow"></span>
-					<input type="checkbox" id="warlords">
-					<label for="warlords">Warlords</label>
-					<p class="line" data-level-dependent-start-row="621" data-level-dependent-end-row="632" data-level-independent-row="108">
-						<input type="color" value="#6C6B69">
-						<input type="checkbox" id="dark-warlord">
-						<label for="dark-warlord">Dark Warlord</label>
-					</p>
-					<p class="line" data-level-dependent-start-row="534" data-level-dependent-end-row="545" data-level-independent-row="93">
-						<input type="color" value="#FFCF00">
-						<input type="checkbox" id="elven-warlord">
-						<label for="elven-warlord">Elven Warlord</label>
-					</p>
-					<p class="line" data-level-dependent-start-row="89" data-level-dependent-end-row="100" data-level-independent-row="17">
-						<input type="color" value="#E7D7A5">
-						<input type="checkbox" id="paladin-lord">
-						<label for="paladin-lord">Paladin Lord</label>
-					</p>
-					<p class="line" data-level-dependent-start-row="273" data-level-dependent-end-row="284" data-level-independent-row="48">
-						<input type="color" value="#CE8631">
-						<input type="checkbox" id="beast-lord">
-						<label for="beast-lord">Beast Lord</label>
-					</p>
-					<p class="line" data-level-dependent-start-row="188" data-level-dependent-end-row="197" data-level-independent-row="33">
-						<input type="color" value="#E72000">
-						<input type="checkbox" id="fire-warlord">
-						<label for="fire-warlord">Fire Warlord</label>
-					</p>
-					<p class="line" data-level-dependent-start-row="2" data-level-dependent-end-row="13" data-level-independent-row="2">
-						<input type="color" value="#0059AD">
-						<input type="checkbox" id="amazon-warlord">
-						<label for="amazon-warlord">Amazon Warlord</label>
-					</p>
-					<p class="line" data-level-dependent-start-row="447" data-level-dependent-end-row="458" data-level-independent-row="78">
-						<input type="color" value="#4A9E10">
-						<input type="checkbox" id="dwarven-warlord">
-						<label for="dwarven-warlord">Dwarven Warlord</label>
-					</p>
-					<p class="line" data-level-dependent-start-row="360" data-level-dependent-end-row="371" data-level-independent-row="63">
-						<input type="color" value="#73BAFF">
-						<input type="checkbox" id="storm-warlord">
-						<label for="storm-warlord">Storm Warlord</label>
-					</p>
-				</div>
-				<div class="level-2 expandable closed-expandable"> 
-					<span class="arrow"></span>
-					<input type="checkbox" id="warriors">
-					<label for="warriors">Warriors</label>
-					<p class="line" data-level-dependent-start-row="633" data-level-dependent-end-row="642" data-level-independent-row="109">
-						<input type="color" value="#6C6B69">
-						<input type="checkbox" id="dark-warrior">
-						<label for="dark-warrior">Dark Warrior</label>
-					</p>
-						<p class="line" data-level-dependent-start-row="546" data-level-dependent-end-row="555" data-level-independent-row="94">
-						<input type="color" value="#FFCF00">
-						<input type="checkbox" id="elven-warrior">
-						<label for="elven-warrior">Elven Warrior</label>
-					</p>
-					<p class="line" data-level-dependent-start-row="101" data-level-dependent-end-row="110" data-level-independent-row="18">
-						<input type="color" value="#E7D7A5">
-						<input type="checkbox" id="paladin">
-						<label for="paladin">Paladin</label>
-					</p>
-					<p class="line" data-level-dependent-start-row="285" data-level-dependent-end-row="294" data-level-independent-row="49">
-						<input type="color" value="#CE8631">
-						<input type="checkbox" id="beast-rider">
-						<label for="beast-rider">Beast Rider</label>
-					</p>
-					<p class="line" data-level-dependent-start-row="198" data-level-dependent-end-row="207" data-level-independent-row="34">
-						<input type="color" value="#E72000">
-						<input type="checkbox" id="fire-warrior">
-						<label for="fire-warrior">Fire Warrior</label>
-					</p>
-					<p class="line" data-level-dependent-start-row="14" data-level-dependent-end-row="23" data-level-independent-row="3">
-						<input type="color" value="#0059AD">
-						<input type="checkbox" id="amazon-warrior">
-						<label for="amazon-warrior">Amazon Warrior</label>
-					</p>
-					<p class="line" data-level-dependent-start-row="459" data-level-dependent-end-row="468" data-level-independent-row="79">
-						<input type="color" value="#4A9E10">
-						<input type="checkbox" id="dwarven-warrior">
-						<label for="dwarven-warrior">Dwarven Warrior</label>
-					</p>
-					<p class="line" data-level-dependent-start-row="372" data-level-dependent-end-row="381" data-level-independent-row="64">
-						<input type="color" value="#73BAFF">
-						<input type="checkbox" id="storm-warrior">
-						<label for="storm-warrior">Storm Warrior</label>
-					</p>
-				</div>
-				<p class="line level-2" data-level-dependent-start-row="176" data-level-dependent-end-row="185" data-level-independent-row="32">
-						<input type="color" value="#FFFFFF">
-						<input type="checkbox" id="lancelot">
-						<label for="lancelot">Lancelot</label>
+		<form class="units-form">
+			<p>Select a unit type to include/exclude it, or click on the colored box to change its color.</p>
+			<div class="level-2 expandable closed-expandable"> 
+				<span class="arrow"></span>
+				<input type="checkbox" id="warlords">
+				<label for="warlords">Warlords</label>
+				<p class="line" data-level-dependent-start-row="621" data-level-dependent-end-row="632" data-level-independent-row="108">
+					<input type="color" value="#6C6B69">
+					<input type="checkbox" id="dark-warlord">
+					<label for="dark-warlord">Dark Warlord</label>
 				</p>
-			</form>
-		</div>
+				<p class="line" data-level-dependent-start-row="534" data-level-dependent-end-row="545" data-level-independent-row="93">
+					<input type="color" value="#FFCF00">
+					<input type="checkbox" id="elven-warlord">
+					<label for="elven-warlord">Elven Warlord</label>
+				</p>
+				<p class="line" data-level-dependent-start-row="89" data-level-dependent-end-row="100" data-level-independent-row="17">
+					<input type="color" value="#E7D7A5">
+					<input type="checkbox" id="paladin-lord">
+					<label for="paladin-lord">Paladin Lord</label>
+				</p>
+				<p class="line" data-level-dependent-start-row="273" data-level-dependent-end-row="284" data-level-independent-row="48">
+					<input type="color" value="#CE8631">
+					<input type="checkbox" id="beast-lord">
+					<label for="beast-lord">Beast Lord</label>
+				</p>
+				<p class="line" data-level-dependent-start-row="188" data-level-dependent-end-row="197" data-level-independent-row="33">
+					<input type="color" value="#E72000">
+					<input type="checkbox" id="fire-warlord">
+					<label for="fire-warlord">Fire Warlord</label>
+				</p>
+				<p class="line" data-level-dependent-start-row="2" data-level-dependent-end-row="13" data-level-independent-row="2">
+					<input type="color" value="#0059AD">
+					<input type="checkbox" id="amazon-warlord">
+					<label for="amazon-warlord">Amazon Warlord</label>
+				</p>
+				<p class="line" data-level-dependent-start-row="447" data-level-dependent-end-row="458" data-level-independent-row="78">
+					<input type="color" value="#4A9E10">
+					<input type="checkbox" id="dwarven-warlord">
+					<label for="dwarven-warlord">Dwarven Warlord</label>
+				</p>
+				<p class="line" data-level-dependent-start-row="360" data-level-dependent-end-row="371" data-level-independent-row="63">
+					<input type="color" value="#73BAFF">
+					<input type="checkbox" id="storm-warlord">
+					<label for="storm-warlord">Storm Warlord</label>
+				</p>
+			</div>
+			<div class="level-2 expandable closed-expandable"> 
+				<span class="arrow"></span>
+				<input type="checkbox" id="warriors">
+				<label for="warriors">Warriors</label>
+				<p class="line" data-level-dependent-start-row="633" data-level-dependent-end-row="642" data-level-independent-row="109">
+					<input type="color" value="#6C6B69">
+					<input type="checkbox" id="dark-warrior">
+					<label for="dark-warrior">Dark Warrior</label>
+				</p>
+					<p class="line" data-level-dependent-start-row="546" data-level-dependent-end-row="555" data-level-independent-row="94">
+					<input type="color" value="#FFCF00">
+					<input type="checkbox" id="elven-warrior">
+					<label for="elven-warrior">Elven Warrior</label>
+				</p>
+				<p class="line" data-level-dependent-start-row="101" data-level-dependent-end-row="110" data-level-independent-row="18">
+					<input type="color" value="#E7D7A5">
+					<input type="checkbox" id="paladin">
+					<label for="paladin">Paladin</label>
+				</p>
+				<p class="line" data-level-dependent-start-row="285" data-level-dependent-end-row="294" data-level-independent-row="49">
+					<input type="color" value="#CE8631">
+					<input type="checkbox" id="beast-rider">
+					<label for="beast-rider">Beast Rider</label>
+				</p>
+				<p class="line" data-level-dependent-start-row="198" data-level-dependent-end-row="207" data-level-independent-row="34">
+					<input type="color" value="#E72000">
+					<input type="checkbox" id="fire-warrior">
+					<label for="fire-warrior">Fire Warrior</label>
+				</p>
+				<p class="line" data-level-dependent-start-row="14" data-level-dependent-end-row="23" data-level-independent-row="3">
+					<input type="color" value="#0059AD">
+					<input type="checkbox" id="amazon-warrior">
+					<label for="amazon-warrior">Amazon Warrior</label>
+				</p>
+				<p class="line" data-level-dependent-start-row="459" data-level-dependent-end-row="468" data-level-independent-row="79">
+					<input type="color" value="#4A9E10">
+					<input type="checkbox" id="dwarven-warrior">
+					<label for="dwarven-warrior">Dwarven Warrior</label>
+				</p>
+				<p class="line" data-level-dependent-start-row="372" data-level-dependent-end-row="381" data-level-independent-row="64">
+					<input type="color" value="#73BAFF">
+					<input type="checkbox" id="storm-warrior">
+					<label for="storm-warrior">Storm Warrior</label>
+				</p>
+			</div>
+			<p class="line level-2" data-level-dependent-start-row="176" data-level-dependent-end-row="185" data-level-independent-row="32">
+				<input type="color" value="#FFFFFF">
+				<input type="checkbox" id="lancelot">
+				<label for="lancelot">Lancelot</label>
+			</p>
+			<div class="level-2 expandable closed-expandable"> 
+				<span class="arrow"></span>
+				<input type="checkbox" id="infantry">
+				<label for="infantry">Infantry</label>
+				<p class="line" data-level-dependent-start-row="643" data-level-dependent-end-row="647" data-level-independent-row="110">
+					<input type="color" value="#6C6B69">
+					<input type="checkbox" id="dark-halberdiers">
+					<label for="dark-halberdiers">Dark Halberdiers</label>
+				</p>
+					<p class="line" data-level-dependent-start-row="556" data-level-dependent-end-row="560" data-level-independent-row="95">
+					<input type="color" value="#FFCF00">
+					<input type="checkbox" id="elven-staffmen">
+					<label for="elven-staffmen">Elven Staffmen</label>
+				</p>
+				<p class="line" data-level-dependent-start-row="111" data-level-dependent-end-row="115" data-level-independent-row="19">
+					<input type="color" value="#E7D7A5">
+					<input type="checkbox" id="footmen">
+					<label for="footmen">Footmen</label>
+				</p>
+				<p class="line" data-level-dependent-start-row="295" data-level-dependent-end-row="299" data-level-independent-row="50">
+					<input type="color" value="#CE8631">
+					<input type="checkbox" id="berserkers">
+					<label for="berserkers">Berserkers</label>
+				</p>
+				<p class="line" data-level-dependent-start-row="208" data-level-dependent-end-row="212" data-level-independent-row="35">
+					<input type="color" value="#E72000">
+					<input type="checkbox" id="flame-berserkers">
+					<label for="flame-berserkers">Flame Berserkers</label>
+				</p>
+				<p class="line" data-level-dependent-start-row="24" data-level-dependent-end-row="28" data-level-independent-row="4">
+					<input type="color" value="#0059AD">
+					<input type="checkbox" id="lizardmen">
+					<label for="lizardmen">Lizardmen</label>
+				</p>
+				<p class="line" data-level-dependent-start-row="469" data-level-dependent-end-row="473" data-level-independent-row="80">
+					<input type="color" value="#4A9E10">
+					<input type="checkbox" id="dwarf-infantry">
+					<label for="dwarf-infantry">Dwarf Infantry</label>
+				</p>
+				<p class="line" data-level-dependent-start-row="382" data-level-dependent-end-row="386" data-level-independent-row="65">
+					<input type="color" value="#73BAFF">
+					<input type="checkbox" id="eagles">
+					<label for="eagles">Eagles</label>
+				</p>
+			</div>
+			<div class="level-2 expandable closed-expandable"> 
+				<span class="arrow"></span>
+				<input type="checkbox" id="cavalry">
+				<label for="cavalry">Cavalry</label>
+				<p class="line" data-level-dependent-start-row="648" data-level-dependent-end-row="652" data-level-independent-row="111">
+					<input type="color" value="#6C6B69">
+					<input type="checkbox" id="dark-horsemen">
+					<label for="dark-horsemen">Dark Horsemen</label>
+				</p>
+					<p class="line" data-level-dependent-start-row="561" data-level-dependent-end-row="565" data-level-independent-row="96">
+					<input type="color" value="#FFCF00">
+					<input type="checkbox" id="elven-riders">
+					<label for="elven-riders">Elven Riders</label>
+				</p>
+				<p class="line" data-level-dependent-start-row="116" data-level-dependent-end-row="121" data-level-independent-row="20" data-special-level-independent-row="21" data-special-threshold="7005">
+					<input type="color" value="#E7D7A5">
+					<input type="checkbox" id="knights">
+					<label for="knights">Knights</label>
+				</p>
+				<p class="line" data-level-dependent-start-row="300" data-level-dependent-end-row="304" data-level-independent-row="51">
+					<input type="color" value="#CE8631">
+					<input type="checkbox" id="raiders">
+					<label for="raiders">Raiders</label>
+				</p>
+				<p class="line" data-level-dependent-start-row="213" data-level-dependent-end-row="217" data-level-independent-row="36">
+					<input type="color" value="#E72000">
+					<input type="checkbox" id="flame-raiders">
+					<label for="flame-raiders">Flame Raiders</label>
+				</p>
+				<p class="line" data-level-dependent-start-row="29" data-level-dependent-end-row="33" data-level-independent-row="5">
+					<input type="color" value="#0059AD">
+					<input type="checkbox" id="heavy-cavalry">
+					<label for="heavy-cavalry">Heavy Cavalry</label>
+				</p>
+				<p class="line" data-level-dependent-start-row="474" data-level-dependent-end-row="478" data-level-independent-row="81">
+					<input type="color" value="#4A9E10">
+					<input type="checkbox" id="riders">
+					<label for="riders">Riders</label>
+				</p>
+				<p class="line" data-level-dependent-start-row="387" data-level-dependent-end-row="391" data-level-independent-row="66">
+					<input type="color" value="#73BAFF">
+					<input type="checkbox" id="windriders">
+					<label for="windriders">Windriders</label>
+				</p>
+			</div>
+			<div class="level-2 expandable closed-expandable"> 
+				<span class="arrow"></span>
+				<input type="checkbox" id="ships">
+				<label for="ships">Ships</label>
+				<p class="line" data-level-dependent-start-row="653" data-level-dependent-end-row="653" data-level-independent-row="112">
+					<input type="color" value="#6C6B69">
+					<input type="checkbox" id="death-galley">
+					<label for="death-galley">Death Galley</label>
+				</p>
+					<p class="line" data-level-dependent-start-row="566" data-level-dependent-end-row="566" data-level-independent-row="97">
+					<input type="color" value="#FFCF00">
+					<input type="checkbox" id="light-galley">
+					<label for="light-galley">Light Galley</label>
+				</p>
+				<p class="line" data-level-dependent-start-row="122" data-level-dependent-end-row="122" data-level-independent-row="22">
+					<input type="color" value="#E7D7A5">
+					<input type="checkbox" id="warship">
+					<label for="warship">Warship</label>
+				</p>
+				<p class="line" data-level-dependent-start-row="305" data-level-dependent-end-row="305" data-level-independent-row="52">
+					<input type="color" value="#CE8631">
+					<input type="checkbox" id="longboat">
+					<label for="longboat">Longboat</label>
+				</p>
+				<p class="line" data-level-dependent-start-row="218" data-level-dependent-end-row="218" data-level-independent-row="37">
+					<input type="color" value="#E72000">
+					<input type="checkbox" id="ferry">
+					<label for="ferry">Ferry</label>
+				</p>
+				<p class="line" data-level-dependent-start-row="34" data-level-dependent-end-row="34" data-level-independent-row="6">
+					<input type="color" value="#0059AD">
+					<input type="checkbox" id="corsair">
+					<label for="corsair">Corsair</label>
+				</p>
+				<p class="line" data-level-dependent-start-row="479" data-level-dependent-end-row="479" data-level-independent-row="82">
+					<input type="color" value="#4A9E10">
+					<input type="checkbox" id="barge">
+					<label for="barge">Barge</label>
+				</p>
+				<p class="line" data-level-dependent-start-row="392" data-level-dependent-end-row="392" data-level-independent-row="67">
+					<input type="color" value="#73BAFF">
+					<input type="checkbox" id="windjammer">
+					<label for="windjammer">Windjammer</label>
+				</p>
+			</div>
+		</form>
 	</div>
 	<div class="page hidden-for-mobile properties-page">
 		<div class="pad-top"></div>
@@ -137,17 +270,17 @@
 					<input type="radio" name="line-property" id="hit-points" data-column-letter=F data-level-dependent>
 					<label for="hit-points">Hit Points</label>
 				</div>
+				<div class="unit-property">
+					<input type="radio" name="line-property" id="mana" data-column-letter=G data-level-dependent>
+					<label for="mana">Mana</label>
+				</div>
+				<div class="unit-property">
+					<input type="radio" name="line-property" id="ranged-attack" data-column-letter=H data-level-dependent>
+					<label for="ranged-attack">Ranged Attack</label>
+				</div>
 				<!--<div class="unit-property">
-					<input type="radio" name="line-property" id="hit points" data-column-number=6>
-					<label for="hit points">Mana*</label>
-				</div>
-				<div class="unit-property">
-					<input type="radio" name="line-property" id="hit points" data-column-number=6>
-					<label for="hit points">Ranged*</label>
-				</div>
-				<div class="unit-property">
-					<input type="radio" name="line-property" id="hit points" data-column-number=6>
-					<label for="hit points">Level*</label>
+					<input type="radio" name="line-property" id="level" data-column-letter=A data-level-dependent>
+					<label for="level">Level</label>
 				</div>
 				<div class="unit-property">
 					<input type="radio" name="line-property" id="hit points" data-column-number=6>
@@ -168,8 +301,8 @@
 				<div class="unit-property">
 					<input type="radio" name="line-property" id="hit points" data-column-number=6>
 					<label for="hit points">Hit Recov</label>
-				</div>-->
-				<div class="button-holder"><button type="submit">Create Graph</button></div>
+				</div>
+				--><div class="button-holder"><button type="submit">Create Graph</button></div>
 			</div>
 		</form>
 		<div class="pad-mid"></div>
@@ -197,9 +330,22 @@
 						<input type="checkbox" id="combat-speed" data-column-letter=C>
 						<label for="combat-speed">Combat Speed</label>
 					</div>
+					<div class="unit-property">
+						<input type="checkbox"  id="bar-mana" data-column-letter=G data-level-dependent>
+						<label for="bar-mana">Mana</label>
+					</div>
+					<div class="unit-property">
+						<input type="checkbox" id="bar-ranged-attack" data-column-letter=H data-level-dependent>
+						<label for="bar-ranged-attack">Ranged Attack</label>
+					</div>
+					<div class="unit-property">
+						<input type="checkbox" id="range" data-column-letter=D>
+						<label for="range">Range</label>
+					</div>
 				</div>
 			</div>
 			<div class="bar-graph-bottom flexbox">
+				<div class="pad-left"></div>
 				<div class="button-holder">
 					<button type="reset">Reset</button>
 				</div>
