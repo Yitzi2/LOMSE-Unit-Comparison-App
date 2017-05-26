@@ -35,10 +35,14 @@ input[type="checkbox"] {
 	margin-left: 0px;
 }
 
-p, .level-2{
+p, .level-2 {
 	margin: 0px;
 	padding-left: 10px;
 	padding-top: 10px;
+}
+
+.unit-padding-bottom {
+	height: 10px;
 }
 
 .center {
@@ -108,18 +112,6 @@ h2 {
 	left-margin: 20px;
 }
 
-.pad-top {
-	flex: 1;
-}
-
-.pad-mid {
-	flex: 2;
-}
-
-.pad-bottom {
-	flex: 5;
-}
-
 .line-graph-form {
 	border-top: 2px black solid;
 	border-bottom: 2px black solid;
@@ -130,7 +122,6 @@ h2 {
 	display: flex;
 	flex-direction: column;
 	overflow: auto;
-	border-top: 2px black solid;
 	border-bottom: 2px black solid;
 }
 
@@ -159,6 +150,10 @@ h2 {
 	padding-bottom: 5px;
 	box-sizing: border-box;
 	padding-left: 16px;
+}
+
+.button-holder {
+	padding-left: 32px;
 }
 
 
