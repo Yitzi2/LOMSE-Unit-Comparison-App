@@ -103,6 +103,71 @@ function addLineGraphData(graphObject, XPdata, propertyData, dataTable, unitNumb
 	}
 }
 
+function getLineTableRange(dTable) {
+	let returnObject = dTable.getColumnRange(1);
+	for (let i = 2; i < dTable.getNumberOfColumns(); ++i) {
+		let columnRange = dTable.getColumnRange(i);
+		if (columnRange.min < returnObject.min) returnObject.min = columnRange.min;
+		if (columnRange.max > returnObject.max) returnObject.max = columnRange.max;
+	}
+	return returnObject;
+
+}
+
+function getMaxOverlap (dTable) {
+	dTable.sort(0); //Will have no effect on charts behavior.
+	let currentValues = [];
+	let currentMax = 0;
+	for (let rowIndex = 0; rowIndex < dTable.getNumberOfRows(); ++rowIndex) {
+		for (let columnIndex = 1; columnIndex < dTable.getNumberOfColumns(); ++columnIndex) {
+			let value = dTable.getValue(rowIndex, columnIndex);
+			if (value !== null && value !== currentValues[columnIndex - 1]) {
+				currentValues[columnIndex - 1] = value;
+				let counter = 0;
+				for (let countIndex = 0; countIndex < dTable.getNumberOfColumns(); ++countIndex) {
+					if (currentValues[countIndex] === value) ++counter;
+				}
+				if (counter > currentMax) currentMax = counter;
+			}
+		}
+	}
+	return currentMax;
+}
+
+function withinDistance (valueOne, valueTwo, distance) {
+	if (valueOne - valueTwo > distance) return false;
+	if (valueTwo - valueOne > distance) return false;
+	return true;
+}
+
+function preventOverlap (dTable, heightPerPoint) {
+	dTable.sort(0);
+	let currentValues = [];
+	for (let rowIndex = 0; rowIndex < dTable.getNumberOfRows(); ++rowIndex) {
+		for (let columnIndex = 1; columnIndex < dTable.getNumberOfColumns(); ++columnIndex) {
+			let value = dTable.getValue(rowIndex, columnIndex);
+			if (value !== null && value !== currentValues[columnIndex - 1]) {
+				if (currentValues[columnIndex - 1] !== undefined && withinDistance (value, currentValues[columnIndex - 1], 0.5)) {
+					dTable.setValue(rowIndex, columnIndex, currentValues[columnIndex - 1]);
+				}
+				else {
+					let currentOffsetGenerator = 0;
+					let currentOffset = 0;
+					while (currentValues.indexOf(value + currentOffset) !== -1) {
+						++currentOffsetGenerator;
+						if (currentOffsetGenerator % 2 === 0) {
+							currentOffset = currentOffsetGenerator/(heightPerPoint);
+						}
+						else currentOffset = -(currentOffsetGenerator + 1)/(heightPerPoint)
+					}  //So the offset goes 0, -2 px, +2 px, -4 px, +4 px, etc.  Negatives are first so that it crosses over less when increasing (as most stats do).
+					dTable.setValue(rowIndex, columnIndex, value + currentOffset);
+					currentValues[columnIndex - 1] = value + currentOffset;
+				}
+			}
+		}
+	}
+}
+
 function drawGraphFromJSON(JSON, graphObject, colors) {
 	if (checkChartsReady() === false) {
 		alert ("Please wait for Google Charts to be loaded, and try again");
@@ -118,7 +183,7 @@ function drawGraphFromJSON(JSON, graphObject, colors) {
 			hAxis: {title: ranges[0].values[0][0]},
 			interpolateNulls: true,
 			colors: [],
-			backgroundColor: "#EFEFEF"
+			backgroundColor: "#EFEFEF",
 		};
 		for (let i = 0; i < colors.length; ++i) {
 			options.colors[i] = colors[i];
@@ -130,6 +195,14 @@ function drawGraphFromJSON(JSON, graphObject, colors) {
 		for (let i = 1; 2*i < ranges.length; ++i) {
 			addLineGraphData(graphObject, ranges[2*i].values, ranges[2*i+1].values, dTable, i);
 		}
+		let heightPerPoint = Math.max(8, 4 * getMaxOverlap(dTable));
+		let graphRange = getLineTableRange(dTable);
+		if (graphObject.properties.data("zeroBase") != undefined && graphRange.min > 0) graphRange.min = 0.5;
+		options.vAxis = {viewWindow: {min: graphRange.min - 0.5, max: Math.max(graphRange.max + 0.5, graphRange.max * 1.05) }};
+		let graphHeight = Math.min(Math.max(heightPerPoint * (graphRange.max - graphRange.min + 1), 150), 300);
+		options.chartArea.height = graphHeight;
+		options.height = graphHeight + 120;
+		preventOverlap(dTable, heightPerPoint);
 		let chart = new google.visualization.LineChart(graphObject.container[0]);
 		graphObject.chart = chart;
 		chart.draw(dTable, options);
@@ -138,7 +211,7 @@ function drawGraphFromJSON(JSON, graphObject, colors) {
 		const options = {
 			chartArea: {backgroundColor: "#BFBFBF"},
 			colors: [],
-			backgroundColor: "#EFEFEF"
+			backgroundColor: "#EFEFEF",
 		};
 		for (let i = 0; i < colors.length; ++i) {
 			options.colors[i] = colors[i];
@@ -169,6 +242,11 @@ function drawGraphFromJSON(JSON, graphObject, colors) {
 			}
 		}
 		dTable.addRows(rowsToAdd);
+		let heightPerPoint = 8;
+		let graphRange = 500;
+		let graphHeight = Math.min(Math.max(heightPerPoint * graphRange, 150), 300);
+		options.chartArea.height = graphHeight;
+		options.height = graphHeight + 120;
 		let chart = new google.visualization.ColumnChart(graphObject.container[0]);
 		graphObject.chart = chart;
 		chart.draw(dTable, options);

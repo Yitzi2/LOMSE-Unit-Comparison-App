@@ -8,15 +8,12 @@ html, body, body>div {
 
 html {
 	overflow: hidden;
+	background-color: #EFEFEF;
 }
 
 .tab {
 	margin: 0px;
 	height: auto;
-}
-
-html {
-	background-color: #EFEFEF;
 }
 
 input[type="color"] {
@@ -133,7 +130,6 @@ h2 {
 
 .graph-container {
 	width: 90%;
-	height: 400px;
 }
 
 .flexbox {
