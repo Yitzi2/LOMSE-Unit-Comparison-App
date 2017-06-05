@@ -354,4 +354,12 @@ function activateButtons () {
 	$("input[type=checkbox]").change(propagateCheckboxes);
 }
 
-$(activateButtons);
+function restoreIndeterminates () {
+	$(".level-2").each (function () {
+		let myOwnBox = $(this).children("input[type=checkbox]");
+		let otherBoxes= $(this).find("input[type=checkbox]").not(myOwnBox);
+		if (otherBoxes.is(":checked") && otherBoxes.is(":not(:checked)")) myOwnBox.prop("indeterminate", true);
+	});
+}
+
+$(function () {activateButtons(); restoreIndeterminates()});
