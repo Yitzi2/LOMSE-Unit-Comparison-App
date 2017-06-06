@@ -321,7 +321,22 @@ function propagateCheckboxes () {
 	}
 	else {
 		if (otherBoxes.is(":checked")) {
-			if (otherBoxes.is(":not(:checked)")) categoryBox.prop("checked", false).prop("indeterminate", true); //Some units are on, some are off.
+			if (otherBoxes.is(":not(:checked)")) categoryBox.prop("checked", true).prop("indeterminate", true); //Some units are on, some are off.
+			else categoryBox.prop("checked", "true").prop("indeterminate", false); //All are on.
+		}
+		else categoryBox.prop("checked", false).prop("indeterminate", false); //All are off.
+	}
+	//And again for level 1
+	category = $(this).closest(".level-1");
+	categoryBox = category.children("input[type=checkbox]");
+	otherBoxes = category.find("input[type=checkbox]").not(categoryBox);
+	if (categoryBox.is(this)) {
+		otherBoxes.prop("checked", $(this).prop("checked"));
+		$(this).prop("indeterminate", false);
+	}
+	else {
+		if (otherBoxes.is(":checked")) {
+			if (otherBoxes.is(":not(:checked)")) categoryBox.prop("checked", true).prop("indeterminate", true); //Some units are on, some are off.
 			else categoryBox.prop("checked", "true").prop("indeterminate", false); //All are on.
 		}
 		else categoryBox.prop("checked", false).prop("indeterminate", false); //All are off.
@@ -373,7 +388,7 @@ function activateButtons () {
 }
 
 function restoreIndeterminates () {
-	$(".level-2").each (function () {
+	$(".level-2, .level-1").each (function () {
 		let myOwnBox = $(this).children("input[type=checkbox]");
 		let otherBoxes= $(this).find("input[type=checkbox]").not(myOwnBox);
 		if (otherBoxes.is(":checked") && otherBoxes.is(":not(:checked)")) myOwnBox.prop("indeterminate", true);

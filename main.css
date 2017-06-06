@@ -32,10 +32,10 @@ input[type="checkbox"] {
 	margin-left: 0px;
 }
 
-p, .level-2 {
+p, .level-1, .level-2 {
 	margin: 0px;
 	padding-left: 10px;
-	padding-top: 10px;
+	padding-top: 9px;
 }
 
 .unit-padding-bottom {
@@ -52,8 +52,7 @@ p, .level-2 {
 }
 
 .level-2 {
-	margin-left: 10px;
-	padding-left: 0px;
+	padding-left: 20px;
 }
 
 .arrow:before {
@@ -65,6 +64,7 @@ p, .level-2 {
 	height: 20px;
 	width: 16px;
 	line-height: 20px;
+	padding-right: 4px;
 }
 
 .closed-expandable .arrow:before {
