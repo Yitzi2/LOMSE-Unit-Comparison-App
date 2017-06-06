@@ -20,6 +20,10 @@ function checkChartsReady () {
 	return state.chartsReady;
 }
 
+function forEachGraph (callback, args) { //callback takes the graph object as this.
+	$.each (state.graphs, function () {callback.apply(this, args);});
+}
+
 function produceA1 (unit, property, XP) { //either or both of the first two parameters can be null.
 	if (unit === null) {
 		var minRow = 1;
@@ -269,7 +273,6 @@ function getGraphData(graphObject) {
 	);
 }
 
-
 function createGraph(isLineGraph, units, properties, minXP, maxXP)  {
 	//units and properties are jquery objects. maxXP is only used when isLineGraph===true
 	if (units.length===0) {
@@ -302,6 +305,12 @@ function createGraph(isLineGraph, units, properties, minXP, maxXP)  {
 	$(".charts-page").append(newGraph.container);
 }
 
+function updateGraph (units) { //Graph object is this.
+	this.units = units;
+	assignQueryObject(this);
+	getGraphData(this);
+}
+
 function propagateCheckboxes () {
 	let category = $(this).closest(".level-2");
 	let categoryBox = category.children("input[type=checkbox]");
@@ -320,13 +329,24 @@ function propagateCheckboxes () {
 }
 
 function activateButtons () {
+	$(".units-form").bind (
+		"reset", function () {
+			$(this).find(".level-2").addClass("closed-expandable");
+			$(this).find("input[type=checkbox]").prop("indeterminate", false);
+		}
+	);
+	$(".units-form").submit (
+		function () {
+			forEachGraph(updateGraph, [$(".units-form .line input[type=checkbox]:checked").map (function () {return $(this).parent();})]
+			);
+			return false;
+		}
+	);
 	$(".line-graph-form").submit (
 		function () {
 			createGraph(
 				true, //isLineGraph
-				$(".units-form .line input[type=checkbox]:checked").map (
-					(i, element) => $(element).parent()
-				), //units
+				$(".units-form .line input[type=checkbox]:checked").map (function () {return $(this).parent();}), //units
 				$(this).find("input[type=radio]:checked"), //properties
 				parseInt($(this).find("input[name=minXP]").val()), //minXP
 				parseInt($(this).find("input[name=maxXP]").val())  //maxXP
@@ -338,9 +358,7 @@ function activateButtons () {
 		function () {
 			createGraph(
 				false, //isLineGraph
-				$(".units-form .line input[type=checkbox]:checked").map (
-					(i, element) => $(element).parent()[0]
-				), //units
+				$(".units-form .line input[type=checkbox]:checked").map (function () {return $(this).parent();}), //units
 				$(this).find("input[type=checkbox]:checked"), //properties
 				parseInt($(this).find("input[name=XP]").val()), //minXP
 				parseInt($(this).find("input[name=XP]").val())  //maxXP

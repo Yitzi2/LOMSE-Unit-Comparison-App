@@ -90,6 +90,9 @@ h2 {
 	float: left;
 	margin-left: 0px;
 	background-color: #BFBFBF;
+}
+
+.scrollable {
 	overflow: auto;
 }
 
@@ -109,6 +112,24 @@ h2 {
 	left-margin: 20px;
 }
 
+.unit-panel-bottom {
+	border-top: 1px black solid;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	width: 100%;
+}
+
+.unit-flex-padding-bottom {
+	flex: 1;
+	padding: 0;
+}
+
+.units-form {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+}
+
 .line-graph-form {
 	border-top: 2px black solid;
 	border-bottom: 2px black solid;
@@ -118,14 +139,12 @@ h2 {
 .bar-graph-form {
 	display: flex;
 	flex-direction: column;
-	overflow: auto;
 	border-bottom: 2px black solid;
 }
 
 .charts-page {
 	margin-left: 322px;
 	margin-right: 324px;
-	overflow: auto;
 }
 
 .graph-container {
@@ -148,10 +167,6 @@ h2 {
 	padding-left: 16px;
 }
 
-.button-holder {
-	padding-left: 32px;
-}
-
 
 .pad-left {
 	width: 10%;
@@ -159,6 +174,7 @@ h2 {
 
 .pad-left+.button-holder {
 	min-width: 40%;
+	padding-left: 32px;
 }
 
 .bar-graph-property-list {
