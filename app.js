@@ -395,4 +395,4 @@ function restoreIndeterminates () {
 	});
 }
 
-$(function () {activateButtons(); restoreIndeterminates()});
+$(function () {restoreIndeterminates();activateButtons();});
