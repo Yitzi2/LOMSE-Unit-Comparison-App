@@ -38,6 +38,8 @@ p, .level-1, .level-2 {
 	padding-top: 9px;
 }
 
+
+
 .unit-padding-bottom {
 	height: 10px;
 }
@@ -51,12 +53,18 @@ p, .level-1, .level-2 {
 	padding-left: 4px;
 }
 
+
+
 .level-2 {
 	padding-left: 20px;
 }
 
 .arrow:before {
 	content: "\25BC";	
+}
+
+.hidden {
+	display: none;
 }
 
 .arrow {
@@ -145,10 +153,12 @@ h2 {
 .charts-page {
 	margin-left: 322px;
 	margin-right: 324px;
+	overflow-y: scroll;
 }
 
-.graph-container {
+.large-graph-container {
 	width: 90%;
+	position: relative;
 }
 
 .flexbox {
@@ -181,4 +191,15 @@ h2 {
 	border-bottom: 1px black solid;
 	box-sizing: border-box;
 	overflow: auto;
+}
+
+.delete {
+	display: block;
+	position: absolute;
+	right: 17.5%;
+	top: 20px;
+}
+
+.hidden.hidden {
+	display: none;
 }

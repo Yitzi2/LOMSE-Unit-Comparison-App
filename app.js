@@ -2,14 +2,25 @@
 
 let state = {
 	graphs: [],
-	lastGraphNumber: -1,
 	chartsReady: false
 };
 
 function addGraphToState (graphObject) {  //Also sets ID
 	state.graphs.push(graphObject);
-	++state.lastGraphNumber;
-	graphObject.container.attr("id", "graphContainer"+state.lastGraphNumber);
+}
+
+function deleteGraph(graphObject) {
+	let i = state.graphs.indexOf(graphObject);
+	if (i === -1) {
+		console.log("Attempted to delete graph that has already been deleted.");
+		return;
+	}
+	state.graphs.splice(i, 1);
+	graphObject.container.remove();
+}
+
+function checkGraphsEmpty () {
+	return (state.graphs.length === 0);
 }
 
 function setChartsReady () {
@@ -76,10 +87,6 @@ function assignQueryObject (graphObject) {
 	graphObject.queryObject = newQueryObject;
 }
 
-function deleteGraph(graphObject) {
-	console.log("Graphs cannot yet be deleted");
-}
-
 function addLineGraphData(graphObject, XPdata, propertyData, dataTable, unitNumber) {
 	for (let i = 0; i < XPdata.length; ++i) {
 		let minXP = parseInt(XPdata[i][0]);
@@ -110,7 +117,7 @@ function addLineGraphData(graphObject, XPdata, propertyData, dataTable, unitNumb
 function getLineTableRange(dTable) {
 	let returnObject = dTable.getColumnRange(1);
 	for (let i = 2; i < dTable.getNumberOfColumns(); ++i) {
-		let columnRange = dTable.getColumnRange(i);
+		const columnRange = dTable.getColumnRange(i);
 		if (columnRange.min < returnObject.min) returnObject.min = columnRange.min;
 		if (columnRange.max > returnObject.max) returnObject.max = columnRange.max;
 	}
@@ -124,7 +131,7 @@ function getMaxOverlap (dTable) {
 	let currentMax = 0;
 	for (let rowIndex = 0; rowIndex < dTable.getNumberOfRows(); ++rowIndex) {
 		for (let columnIndex = 1; columnIndex < dTable.getNumberOfColumns(); ++columnIndex) {
-			let value = dTable.getValue(rowIndex, columnIndex);
+			const value = dTable.getValue(rowIndex, columnIndex);
 			if (value !== null && value !== currentValues[columnIndex - 1]) {
 				currentValues[columnIndex - 1] = value;
 				let counter = 0;
@@ -149,7 +156,7 @@ function preventOverlap (dTable, heightPerPoint) {
 	let currentValues = [];
 	for (let rowIndex = 0; rowIndex < dTable.getNumberOfRows(); ++rowIndex) {
 		for (let columnIndex = 1; columnIndex < dTable.getNumberOfColumns(); ++columnIndex) {
-			let value = dTable.getValue(rowIndex, columnIndex);
+			const value = dTable.getValue(rowIndex, columnIndex);
 			if (value !== null && value !== currentValues[columnIndex - 1]) {
 				if (currentValues[columnIndex - 1] !== undefined && withinDistance (value, currentValues[columnIndex - 1], 0.5)) {
 					dTable.setValue(rowIndex, columnIndex, currentValues[columnIndex - 1]);
@@ -182,8 +189,8 @@ function drawGraphFromJSON(JSON, graphObject, colors) {
 	const ranges = JSON.valueRanges;
 	if (graphObject.isLineGraph) {
 		const options = {
-			title: ranges[1].values[0][0],
-			chartArea: {backgroundColor: "#BFBFBF"},
+			title: `Comparing ${ranges[1].values[0][0]}`,
+			chartArea: {backgroundColor: "#BFBFBF", width: "65%"},
 			hAxis: {title: ranges[0].values[0][0]},
 			interpolateNulls: true,
 			colors: [],
@@ -199,21 +206,21 @@ function drawGraphFromJSON(JSON, graphObject, colors) {
 		for (let i = 1; 2*i < ranges.length; ++i) {
 			addLineGraphData(graphObject, ranges[2*i].values, ranges[2*i+1].values, dTable, i);
 		}
-		let heightPerPoint = Math.max(8, 4 * getMaxOverlap(dTable));
-		let graphRange = getLineTableRange(dTable);
+		const heightPerPoint = Math.max(8, 4 * getMaxOverlap(dTable));
+		const graphRange = getLineTableRange(dTable);
 		if (graphObject.properties.data("zeroBase") != undefined && graphRange.min > 0) graphRange.min = 0.5;
 		options.vAxis = {viewWindow: {min: graphRange.min - 0.5, max: Math.max(graphRange.max + 0.5, graphRange.max * 1.05) }};
-		let graphHeight = Math.min(Math.max(heightPerPoint * (graphRange.max - graphRange.min + 1), 150), 300);
+		const graphHeight = Math.min(Math.max(heightPerPoint * (graphRange.max - graphRange.min + 1), 150), 300);
 		options.chartArea.height = graphHeight;
 		options.height = graphHeight + 120;
 		preventOverlap(dTable, heightPerPoint);
-		let chart = new google.visualization.LineChart(graphObject.container[0]);
+		const chart = new google.visualization.LineChart(graphObject.container.children(".small-graph-container")[0]);
 		graphObject.chart = chart;
 		chart.draw(dTable, options);
 	}
 	else {
 		const options = {
-			chartArea: {backgroundColor: "#BFBFBF"},
+			chartArea: {backgroundColor: "#BFBFBF", width: "65%"},
 			colors: [],
 			backgroundColor: "#EFEFEF",
 		};
@@ -246,19 +253,20 @@ function drawGraphFromJSON(JSON, graphObject, colors) {
 			}
 		}
 		dTable.addRows(rowsToAdd);
-		let heightPerPoint = 8;
-		let graphRange = 500;
-		let graphHeight = Math.min(Math.max(heightPerPoint * graphRange, 150), 300);
+		const heightPerPoint = 8;
+		const graphRange = 500;
+		const graphHeight = Math.min(Math.max(heightPerPoint * graphRange, 150), 300);
 		options.chartArea.height = graphHeight;
 		options.height = graphHeight + 120;
-		let chart = new google.visualization.ColumnChart(graphObject.container[0]);
+		const chart = new google.visualization.ColumnChart(graphObject.container.children(".small-graph-container")[0]);
 		graphObject.chart = chart;
 		chart.draw(dTable, options);
 	}
+	graphObject.container.children(".delete").removeClass("hidden");
 }
 
 function getGraphData(graphObject) {
-	let colors = graphObject.units.map(
+	const colors = graphObject.units.map(
 			(i, unit) => $(unit).children("input[type=color]").val()
 		); 
 	    //Recorded now, in case it changes while waiting for the AJAX call.
@@ -268,7 +276,11 @@ function getGraphData(graphObject) {
 			url: "https://sheets.googleapis.com/v4/spreadsheets/1JPoPP6n5b5OhwRBQOG8atRNMUCTImv-SeV0XG762Zzo/values:batchGet",
 			data: graphObject.queryObject,
 			traditional: true,
-			success: function (data) {drawGraphFromJSON(data, graphObject, colors);}
+			success: function (data) {drawGraphFromJSON(data, graphObject, colors);},
+			error: function() {
+				alert ("Something went wrong.  Please try again, or reduce the number of units and/or properties requested.")
+				deleteGraph(graphObject);
+			}
 		}
 	);
 }
@@ -297,12 +309,14 @@ function createGraph(isLineGraph, units, properties, minXP, maxXP)  {
 		properties: properties,
 		minXP: minXP,
 		maxXP: maxXP,
-		container: $("<div class='graph-container'></div>")
+		container: $("<div class='large-graph-container'><div class='small-graph-container'></div><button class='delete hidden'>Delete Graph</button></div>")
 	};
+	newGraph.container.children(".delete").data("graphObject", newGraph);
+	console.log(newGraph.container.children(".delete"));
 	addGraphToState(newGraph);
 	assignQueryObject(newGraph);
 	getGraphData(newGraph);
-	$(".charts-page").append(newGraph.container);
+	if (newGraph.container !== undefined) $(".charts-page").append(newGraph.container);
 }
 
 function updateGraph (units) { //Graph object is this.
@@ -331,7 +345,7 @@ function propagateCheckboxes () {
 	categoryBox = category.children("input[type=checkbox]");
 	otherBoxes = category.find("input[type=checkbox]").not(categoryBox);
 	if (categoryBox.is(this)) {
-		otherBoxes.prop("checked", $(this).prop("checked"));
+		otherBoxes.prop("checked", $(this).prop("checked")).prop("indeterminate", false);
 		$(this).prop("indeterminate", false);
 	}
 	else {
@@ -385,12 +399,13 @@ function activateButtons () {
 		function () {$(this).parent().toggleClass("closed-expandable");}
 	);
 	$("input[type=checkbox]").change(propagateCheckboxes);
+	$(".charts-page").on("click", ".delete", function () {deleteGraph($(this).data("graphObject"));})
 }
 
-function restoreIndeterminates () {
+function restoreIndeterminates () { //Needed for browsers that persist input values across refereshes
 	$(".level-2, .level-1").each (function () {
-		let myOwnBox = $(this).children("input[type=checkbox]");
-		let otherBoxes= $(this).find("input[type=checkbox]").not(myOwnBox);
+		const myOwnBox = $(this).children("input[type=checkbox]");
+		const otherBoxes= $(this).find("input[type=checkbox]").not(myOwnBox);
 		if (otherBoxes.is(":checked") && otherBoxes.is(":not(:checked)")) myOwnBox.prop("indeterminate", true);
 	});
 }
