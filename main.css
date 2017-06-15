@@ -1,3 +1,12 @@
+* {
+	font-family: "Roboto";
+	font-variant: small-caps;
+}
+
+p:not(.line):not(.unit-property) {
+	line-height: 150%;
+}
+
 html, body, body>div {
 	box-sizing: border-box;
 	margin-top: 0px;
@@ -8,7 +17,7 @@ html, body, body>div {
 
 html {
 	overflow: hidden;
-	background-color: #EFEFEF;
+	background-color: #E7EFF7;
 }
 
 .tab {
@@ -36,6 +45,7 @@ p, .level-1, .level-2 {
 	margin: 0px;
 	padding-left: 10px;
 	padding-top: 9px;
+	padding-right: 5px;
 }
 
 
@@ -161,12 +171,20 @@ h2 {
 	position: relative;
 }
 
+.intro-instructions {
+	margin: 10px;
+}
+
 .flexbox {
 	display: flex;
 	justify-content: space-around;
 	align-items: flex-start;
 	flex-wrap: wrap;
 	align-content: flex-start;
+}
+
+.mobile-intro {
+	display: none;
 }
 
 .unit-property, .button-holder {

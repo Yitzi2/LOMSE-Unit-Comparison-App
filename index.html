@@ -4,6 +4,7 @@
 	<title>LOMSE Unit Comparison</title>
 	<meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
     <link href="main.css" rel="stylesheet" type="text/css" />
 </head>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -15,11 +16,14 @@
 </script>
 <body>
 	<div class="tab" data-target="units-page"></div><div class="tab" data-target="properties-page"></div><div class="tab" data-target="graphs-page"></div>
-	<div class="page units-page">
+	<div class="mobile-intro">
+			<p>On this page, you can compare units for Lords of Magic: Special Edition (an old computer game).  Use the units panel to select units to compare, and the properties panel to choose which properties to compare, and the type of graph to make.</p>
+	</div>
+	<div class="page hidden-for-mobile units-page">
 		<form class="units-form scrollable">
 			<div class="scrollable"> <!--Just to arrange the flexbox-->
-				<p>Select a unit type to include/exclude it. You can click on an arrow to expand it, or on a colored box to change its color.</p>
-				<div class="level-1 expandable">
+				<p>Here you can select units to compare, and change the color used in the graph for each unit.</p>
+				<div class="level-1 expandable ">
 					<span class="arrow"></span><input type="checkbox" id="champions">
 					<label for="champions">Champions and Lords</label>
 					<div class="level-2 expandable closed-expandable">
@@ -940,7 +944,10 @@
 		</form>
 		<div class="pad-bottom"></div>
 	</div>
-	<div class="page hidden-for-mobile charts-page scrollable">
+	<div class="page hidden-for-mobile charts-page scrollable hidden-for-mobile">
+		<header class="intro-instructions">
+			<p>On this page, you can compare units for Lords of Magic: Special Edition (an old computer game).  Use the left-hand panel to select units to compare, and the right-hand panel to choose which properties to compare, and the type of graph to make.</p>
+		</header>
 	</div>
 </body>
 </html>

@@ -145,20 +145,15 @@ function getMaxOverlap (dTable) {
 	return currentMax;
 }
 
-function withinDistance (valueOne, valueTwo, distance) {
-	if (valueOne - valueTwo > distance) return false;
-	if (valueTwo - valueOne > distance) return false;
-	return true;
-}
-
 function preventOverlap (dTable, heightPerPoint) {
 	dTable.sort(0);
 	let currentValues = [];
+	let currentTrueValues = [];
 	for (let rowIndex = 0; rowIndex < dTable.getNumberOfRows(); ++rowIndex) {
 		for (let columnIndex = 1; columnIndex < dTable.getNumberOfColumns(); ++columnIndex) {
 			const value = dTable.getValue(rowIndex, columnIndex);
 			if (value !== null && value !== currentValues[columnIndex - 1]) {
-				if (currentValues[columnIndex - 1] !== undefined && withinDistance (value, currentValues[columnIndex - 1], 0.5)) {
+				if (currentTrueValues[columnIndex - 1] !== undefined && value === currentTrueValues[columnIndex - 1]) {
 					dTable.setValue(rowIndex, columnIndex, currentValues[columnIndex - 1]);
 				}
 				else {
@@ -169,10 +164,11 @@ function preventOverlap (dTable, heightPerPoint) {
 						if (currentOffsetGenerator % 2 === 0) {
 							currentOffset = currentOffsetGenerator/(heightPerPoint);
 						}
-						else currentOffset = -(currentOffsetGenerator + 1)/(heightPerPoint)
+						else currentOffset = -(currentOffsetGenerator + 1)/(heightPerPoint);
 					}  //So the offset goes 0, -2 px, +2 px, -4 px, +4 px, etc.  Negatives are first so that it crosses over less when increasing (as most stats do).
 					dTable.setValue(rowIndex, columnIndex, value + currentOffset);
 					currentValues[columnIndex - 1] = value + currentOffset;
+					currentTrueValues[columnIndex - 1] = value;
 				}
 			}
 		}
@@ -189,12 +185,12 @@ function drawGraphFromJSON(JSON, graphObject, colors) {
 	const ranges = JSON.valueRanges;
 	if (graphObject.isLineGraph) {
 		const options = {
-			title: `Comparing ${ranges[1].values[0][0]}`,
+			title: ranges[1].values[0][0],
 			chartArea: {backgroundColor: "#BFBFBF", width: "65%"},
 			hAxis: {title: ranges[0].values[0][0]},
 			interpolateNulls: true,
 			colors: [],
-			backgroundColor: "#EFEFEF",
+			backgroundColor: "#E7EFF7",
 		};
 		for (let i = 0; i < colors.length; ++i) {
 			options.colors[i] = colors[i];
@@ -206,23 +202,25 @@ function drawGraphFromJSON(JSON, graphObject, colors) {
 		for (let i = 1; 2*i < ranges.length; ++i) {
 			addLineGraphData(graphObject, ranges[2*i].values, ranges[2*i+1].values, dTable, i);
 		}
-		const heightPerPoint = Math.max(8, 4 * getMaxOverlap(dTable));
+		let heightPerPoint = Math.max(8, 4 * getMaxOverlap(dTable));
 		const graphRange = getLineTableRange(dTable);
 		if (graphObject.properties.data("zeroBase") != undefined && graphRange.min > 0) graphRange.min = 0.5;
 		options.vAxis = {viewWindow: {min: graphRange.min - 0.5, max: Math.max(graphRange.max + 0.5, graphRange.max * 1.05) }};
 		const graphHeight = Math.min(Math.max(heightPerPoint * (graphRange.max - graphRange.min + 1), 150), 300);
+		heightPerPoint = graphHeight / (graphRange.max - graphRange.min);
 		options.chartArea.height = graphHeight;
 		options.height = graphHeight + 120;
 		preventOverlap(dTable, heightPerPoint);
 		const chart = new google.visualization.LineChart(graphObject.container.children(".small-graph-container")[0]);
 		graphObject.chart = chart;
 		chart.draw(dTable, options);
+		$(".intro-instructions").detach();
 	}
 	else {
 		const options = {
 			chartArea: {backgroundColor: "#BFBFBF", width: "65%"},
 			colors: [],
-			backgroundColor: "#EFEFEF",
+			backgroundColor: "#E7EFF7",
 		};
 		for (let i = 0; i < colors.length; ++i) {
 			options.colors[i] = colors[i];
@@ -312,7 +310,6 @@ function createGraph(isLineGraph, units, properties, minXP, maxXP)  {
 		container: $("<div class='large-graph-container'><div class='small-graph-container'></div><button class='delete hidden'>Delete Graph</button></div>")
 	};
 	newGraph.container.children(".delete").data("graphObject", newGraph);
-	console.log(newGraph.container.children(".delete"));
 	addGraphToState(newGraph);
 	assignQueryObject(newGraph);
 	getGraphData(newGraph);
