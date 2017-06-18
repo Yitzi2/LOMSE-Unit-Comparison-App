@@ -44,7 +44,7 @@ input[type="checkbox"] {
 p, .level-1, .level-2 {
 	margin: 0px;
 	padding-left: 10px;
-	padding-top: 9px;
+	padding-top: 8px;
 	padding-right: 5px;
 }
 
@@ -195,6 +195,28 @@ h2 {
 	padding-left: 16px;
 }
 
+button
+{
+    width: 125px;
+    height: 36px;
+    background-color: #BFBFBF;   
+    border: 0px;
+    box-shadow: inset 2px 2px 2px rgba(255, 255, 255, .4), inset -2px -2px 2px rgba(0, 0, 0, .4);
+    position: relative;
+}
+
+button:active {
+  box-shadow: inset 2px 2px 2px rgba(0, 0, 0, .5), inset -2px -2px 2px rgba(0, 0, 0, .5);
+}
+
+button:active div {
+  width: 123px;
+  height: 34px;
+  box-shadow: inset 2px 2px 2px rgba(255, 255, 255, .4);
+  position: absolute;
+  left: 2px;
+  top: 2px;
+}
 
 .pad-left {
 	width: 10%;

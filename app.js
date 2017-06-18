@@ -45,10 +45,10 @@ function produceA1 (unit, property, XP) { //either or both of the first two para
 		const unitData = $(unit).data();
 		var minRow = unitData.levelDependentStartRow;
 		var maxRow = unitData.levelDependentEndRow;
-		if (unitData.dataSpecialThreshold === undefined || XP < parseInt(unitData.dataSpecialThreshold)) {
+		if (unitData.specialThreshold === undefined || XP < parseInt(unitData.specialThreshold)) {
 			var indepRow = unitData.levelIndependentRow;
 		}
-		else varindepRow = unitData.specialLevelIndependentRow;
+		else var indepRow = unitData.specialLevelIndependentRow;
 	}
 	if (property === null) {
 		var sheet = "Level-dependent";
