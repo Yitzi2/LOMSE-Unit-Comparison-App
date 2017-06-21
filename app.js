@@ -186,11 +186,13 @@ function drawGraphFromJSON(JSON, graphObject, colors) {
 	if (graphObject.isLineGraph) {
 		const options = {
 			title: ranges[1].values[0][0],
-			chartArea: {backgroundColor: "#BFBFBF", width: "65%"},
+			chartArea: {backgroundColor: "#BFBFBF", width: "65%", left: "10%"},
 			hAxis: {title: ranges[0].values[0][0]},
 			interpolateNulls: true,
 			colors: [],
 			backgroundColor: "#E7EFF7",
+			fontSize: 12,
+
 		};
 		for (let i = 0; i < colors.length; ++i) {
 			options.colors[i] = colors[i];
@@ -313,7 +315,7 @@ function createGraph(isLineGraph, units, properties, minXP, maxXP)  {
 	addGraphToState(newGraph);
 	assignQueryObject(newGraph);
 	getGraphData(newGraph);
-	if (newGraph.container !== undefined) $(".charts-page").append(newGraph.container);
+	if (newGraph.container !== undefined) $(".charts-panel").append(newGraph.container);
 }
 
 function updateGraph (units) { //Graph object is this.
@@ -396,7 +398,7 @@ function activateButtons () {
 		function () {$(this).parent().toggleClass("closed-expandable");}
 	);
 	$("input[type=checkbox]").change(propagateCheckboxes);
-	$(".charts-page").on("click", ".delete", function () {deleteGraph($(this).data("graphObject"));})
+	$(".charts-panel").on("click", ".delete", function () {deleteGraph($(this).data("graphObject"));})
 }
 
 function restoreIndeterminates () { //Needed for browsers that persist input values across refereshes

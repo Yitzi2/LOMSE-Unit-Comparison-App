@@ -15,15 +15,15 @@
   	google.charts.setOnLoadCallback(setChartsReady);
 </script>
 <body>
-	<div class="tab" data-target="units-page"></div><div class="tab" data-target="properties-page"></div><div class="tab" data-target="graphs-page"></div>
+	<div class="tab" data-target="units-panel"></div><div class="tab" data-target="properties-panel"></div><div class="tab" data-target="graphs-page"></div>
 	<div class="mobile-intro">
-			<p>On this page, you can compare units for Lords of Magic: Special Edition (an old computer game).  Use the units panel to select units to compare, and the properties panel to choose which properties to compare, and the type of graph to make.</p>
+			<p>On this page, you can compare the units of <span class="game-title">Lords of Magic: Special Edition</span> (an old computer game).  Use the units panel to select units to compare, and the properties panel to choose which properties to compare, and the type of graph to make.</p>
 	</div>
-	<div class="page hidden-for-mobile units-page">
+	<div class="page hidden-for-tabbed units-panel">
 		<form class="units-form scrollable">
-			<div class="scrollable"> <!--Just to arrange the flexbox-->
+			<div class="units-panel-main scrollable"> <!--Just to arrange the flexbox-->
 				<p>Here you can select units to compare, change the color used in the graph for each unit, and update existing graphs.</p>
-				<div class="level-1 expandable">
+				<section class="level-1 expandable">
 					<span class="arrow"></span><input type="checkbox" id="champions">
 					<label for="champions">Champions and Lords</label>
 					<div class="level-2 expandable closed-expandable">
@@ -305,7 +305,7 @@
 							<label for="lich">Lich</label>
 						</p>
 					</div>
-				</div>
+				</section>
 				<div class="level-1 expandable">
 					<span class="arrow"></span><input type="checkbox" id="military-units">
 					<label for="military-units">Military Units</label>
@@ -719,16 +719,15 @@
 						</p>
 					</div>
 				</div>
-				<p class="unit-padding-bottom"></p>
 			</div>
-			<div class="flexbox button-holder unit-panel-bottom">
-				<button type="reset"><div></div>Reset</button>
-				<button type="submit"><div></div>Update Graphs</button>
-			</div>
-			<p class="unit-flex-padding-bottom"></p>
+			<footer class="flexbox">
+				<button type="reset"><div></div>Reset</button> <!--div is for styling when pressed-->
+				<button type="submit"><div></div>Update Graphs</button> <!--div is for styling when pressed-->
+			</footer>
+			<div class="units-flex-padding-bottom"></div>
 		</form>
 	</div>
-	<div class="page hidden-for-mobile properties-page">
+	<div class="page hidden-for-tabbed properties-panel">
 		<form class="line-graph-form">
 			<h2>Line graphs</h2>
 			<p class="center">
@@ -779,7 +778,7 @@
 					<input type="radio" name="line-property" id="hit-recovery" data-column-letter=M data-level-dependent data-zero-base>
 					<label for="hit-recovery">Hit Recovery</label>
 				</div>
-				<div class="button-holder"><button type="submit"><div></div>Create Graph</button></div>
+				<div class="line-graph-button-holder"><button type="submit"><div></div>Create Graph</button></div>
 			</div>
 		</form>
 		<form class="bar-graph-form scrollable">
@@ -932,20 +931,16 @@
 					</div>
 				</div>
 			</div>
-			<div class="bar-graph-bottom flexbox">
-				<div class="button-holder">
-					<button type="reset"><div></div>Reset</button>
-				</div>
-				<div class="button-holder">
-					<button type="submit"><div></div>Create Graph</button>
-				</div>
-			</div>
+			<footer class="flexbox">
+				<button type="reset"><div></div>Reset</button>
+				<button type="submit"><div></div>Create Graph</button>
+			</footer>
 		</form>
 		<div class="pad-bottom"></div>
 	</div>
-	<div class="page hidden-for-mobile charts-page scrollable hidden-for-mobile">
+	<div class="page hidden-for-tabbed charts-panel scrollable hidden-for-tabbed">
 		<header class="intro-instructions">
-			<p>On this page, you can compare units for Lords of Magic: Special Edition (an old computer game).  Use the left-hand panel to select units to compare, and the right-hand panel to choose which properties to compare, and the type of graph to make.</p>
+			<p>On this page, you can compare the units of <span class="game-title">Lords of Magic: Special Edition</span> (an old computer game).  Use the left-hand panel to select units to compare, and the right-hand panel to choose which properties to compare, and the type of graph to make.</p>
 		</header>
 	</div>
 </body>

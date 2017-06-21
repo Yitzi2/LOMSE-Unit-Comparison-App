@@ -1,245 +1,286 @@
-* {
-	font-family: "Roboto";
-	font-variant: small-caps;
+/*Default is for 320-768px and assumes touchscreen.  Tabbed, with large buttons.*/
+
+
+
+/*320 to 800 with mouse is tabbed, without large buttons.  
+IE, Firefox, and Opera Mini don't support pointer, so the 768/769 boundary for width is used as a substitute.*/
+@media (min-width: 769px), (pointer: fine); { 
+
 }
 
-p:not(.line):not(.unit-property) {
-	line-height: 150%;
+/*If the browser can detect it's a touchscreen, use the default even if it's above 768px.*/
+@media (pointer: coarse) {
+
 }
 
-html, body, body>div {
-	box-sizing: border-box;
-	margin-top: 0px;
-	margin-bottom: 0px;
-	margin: 0px;
-	height: 100%;
+/*801 to 960px has 320px for the center panel, and scales the others to fit width.*/
+@media (min-width: 800px) {
+
 }
 
-html {
-	overflow: hidden;
-	background-color: #E7EFF7;
+/*Larger buttons, for large tablets.*/
+@media (min-width: 800px) and (pointer: coarse) {
+
 }
 
-.tab {
-	margin: 0px;
-	height: auto;
+/*961 to 1280px has 50% for the center panel and 25% for the side panels.*/
+@media (min-width: 960px) {
+
 }
 
-input[type="color"] {
-	width: 13px;
-	height: 13px;
-	padding: 0px;
-	border: none;
-	margin-right: 3px;
+/*Some tablets are still that large*/
+@media (min-width: 960px) and (pointer: coarse) {
+
 }
 
-input[type="number"] {
-	width: 55px;
+/*1280px and up has 320px for the side panels and the rest is the center.*/
+@media (min-width: 1280px) {
+
 }
 
-input[type="checkbox"] {
-	margin-left: 0px;
-}
+/*I don't think any tablets are that large, but it can't hurt to include it in case they come out with one.*/
+@media (min-width: 1280px) and (pointer: coarse) {
 
-p, .level-1, .level-2 {
-	margin: 0px;
-	padding-left: 10px;
-	padding-top: 8px;
-	padding-right: 5px;
 }
 
 
+/*Everything below here needs to be transitioned*/
 
-.unit-padding-bottom {
-	height: 10px;
-}
+/*Style to approximately match the game*/
 
-.center {
-	text-align: center;
-}
+	* {
+		font-family: "Roboto";
+		font-variant: small-caps;
+		font-size: 12pt; /*Scale*/
+	}
 
-.line {
-	margin-left: 16px;
-	padding-left: 4px;
-}
+	p:not(.line):not(.unit-property) {
+		line-height: 150%;
+	}
+
+	html {
+		background-color: #E7EFF7;
+	}
+
+	.units-panel, .properties-panel {
+		background-color: #BFBFBF;
+	}
+
+	/*Button style*/
+
+	button
+	{
+	    width: 125px; /*Scale*/
+	    height: 36px; /*Scale and increase for touchscreen*/
+	    background-color: #BFBFBF;   
+	    border: 0;
+	    box-shadow: inset 2px 2px 2px rgba(255, 255, 255, .4), inset -2px -2px 2px rgba(0, 0, 0, .4);
+	    position: relative;
+	}
+
+	button:active {
+	  box-shadow: inset 2px 2px 2px rgba(0, 0, 0, .5), inset -2px -2px 2px rgba(0, 0, 0, .5);
+	}
+
+	button:active div {
+	  width: 123px; /*regular minus 2px*/
+	  height: 34px; /*regular minus 2px*/
+	  box-shadow: inset 2px 2px 2px rgba(255, 255, 255, .4);
+	  position: absolute;
+	  left: 2px;
+	  top: 2px;
+	}
+
+/*Set basic layout including scrolling, margins, and height. */
+
+	html {
+		overflow: hidden;
+	}
+
+	body {
+		margin: 0;
+	}
+
+	html, body, body>div, .units-form {
+		height: 100%;
+	}
+
+	.units-form, .bar-graph-form {
+		display: flex;
+		flex-direction: column;
+	}
+
+	.scrollable, .bar-graph-property-list {
+		overflow: auto;
+	}
+
+	.charts-panel { /*So that the width doesn't change when a scrollbar is added*/
+		overflow-y: scroll;
+	}
 
 
+/*Features unique to the tabbed version of the page*/
 
-.level-2 {
-	padding-left: 20px;
-}
+	.tab {
+		display: none;  /*Changed to an appropriate size for tabbed*/
+	}
 
-.arrow:before {
-	content: "\25BC";	
-}
+	.mobile-intro {
+		display: none;
+	}
 
-.hidden {
-	display: none;
-}
+/*First panel: Units*/
 
-.arrow {
-	display: inline-block;
-	height: 20px;
-	width: 16px;
-	line-height: 20px;
-	padding-right: 4px;
-}
+	.units-panel {
+		width: 320px; /*Scale, use (sans border) as main scaling factor*/
+		border-right: 2px black solid;
+		box-sizing: border-box;
+		float: left;
+		margin-left: 0px;
+	}
 
-.closed-expandable .arrow:before {
-	content: "\25B6";
-}
+	.units-panel-main {
+		padding-bottom: 20px; /*Scale*/
+	}
 
-.closed-expandable .expandable, .closed-expandable .line {
-	display: none;
-}
+	p, .level-1 {
+		margin: 8px 5px 0 10px; /*Scale*/
+	}
 
-h2 {
-	text-align: center;
-	margin: 0px;
-	padding-top: 5px;
-	padding-bottom: 0px;
-	font-size: 12pt;
-	font-weight: 700;
-}
+	/*Including the expandability feature and arrows*/
 
-.units-page {
-	width: 320px;
-	border-right: 2px black solid;
-	float: left;
-	margin-left: 0px;
-	background-color: #BFBFBF;
-}
+		.arrow:before {
+			content: "\25BC";
+			font-size: 12pt; /*Do not scale, increase for touchscreen*/
+		}
 
-.scrollable {
-	overflow: auto;
-}
+		.arrow { /*Do not scale, increase for touchscreen*/
+			display: inline-block;
+			height: 20px;
+			width: 16px;
+			line-height: 20px;
+			padding-right: 4px; /*Do not increase for touchscreen*/
+		}
 
-.properties-page {
-	width: 320px;
-	border-left: 2px black solid;
-	border-right: 2px black solid;
-	float: right;
-	margin-left: 0px;
-	background-color: #BFBFBF;
-	display: flex;
-	flex-direction: column;
-}
+		.closed-expandable .arrow:before {
+			content: "\25B6";
+		}
 
-.properties-page button[type=reset] {
-	text-align: center;
-	left-margin: 20px;
-}
+		.closed-expandable .expandable, .closed-expandable .line {
+			display: none;
+		}
 
-.unit-panel-bottom {
-	border-top: 1px black solid;
-	padding-top: 2px;
-	padding-bottom: 2px;
-	width: 100%;
-}
+	.level-2, .line {
+		margin: 8px 5px 0 20px; /*Scale, but left margin scales to arrow size*/
+	}
 
-.unit-flex-padding-bottom {
-	flex: 1;
-	padding: 0;
-}
+	input[type="checkbox"] {
+		margin-left: 0; /*Increase by half of arrow increase for touchscreen*/
+	}
 
-.units-form {
-	display: flex;
-	flex-direction: column;
-	height: 100%;
-}
+	label {
+		/*For touchscreen, make inline block with padding on top and bottom.*/
+	}
 
-.line-graph-form {
-	border-top: 2px black solid;
-	border-bottom: 2px black solid;
-	box-sizing: border-box;
-}
+	input[type="color"] {
+		width: 13px; /*Do not scale.  Increase for touchscreen*/
+		height: 13px; /*Do not scale.  Increase for touchscreen*/
+		padding: 0;
+		border: none;
+		margin-right: 3px; /*Scale, and increase for touchscreen*/
+	}
 
-.bar-graph-form {
-	display: flex;
-	flex-direction: column;
-	border-bottom: 2px black solid;
-}
+	footer {
+		border-top: 1px black solid;
+		padding: 5px 0px; /*Scale*/
+	}
 
-.charts-page {
-	margin-left: 322px;
-	margin-right: 324px;
-	overflow-y: scroll;
-}
+	.units-flex-padding-bottom {
+		flex: 1;
+	}
 
-.large-graph-container {
-	width: 90%;
-	position: relative;
-}
 
-.intro-instructions {
-	margin: 10px;
-}
+/*Second panel: Properties*/
 
-.flexbox {
-	display: flex;
-	justify-content: space-around;
-	align-items: flex-start;
-	flex-wrap: wrap;
-	align-content: flex-start;
-}
+	.properties-panel {
+		width: 320px; /*Scale*/
+		box-sizing: border-box;
+		border-left: 2px black solid;
+		border-right: 2px black solid;
+		float: right;
+		margin-left: 0px;
+		display: flex;
+		flex-direction: column;
+	}
 
-.mobile-intro {
-	display: none;
-}
+	.properties-panel h2 {
+		text-align: center;
+		margin: 0;
+		padding-top: 5px; /*Scale*/
+		padding-bottom: 0;
+		font-size: 12pt; /*Scale*/
+		font-weight: 700;
+	}
 
-.unit-property, .button-holder {
-	min-width: 50%;
-	padding-top: 5px;
-	padding-bottom: 5px;
-	box-sizing: border-box;
-	padding-left: 16px;
-}
+	.line-graph-form {
+		border-top: 2px black solid;
+		border-bottom: 2px black solid;
+		box-sizing: border-box;
+	}
 
-button
-{
-    width: 125px;
-    height: 36px;
-    background-color: #BFBFBF;   
-    border: 0px;
-    box-shadow: inset 2px 2px 2px rgba(255, 255, 255, .4), inset -2px -2px 2px rgba(0, 0, 0, .4);
-    position: relative;
-}
+	input[type="number"] {
+		width: 55px; /*Scale with panel size and consider increasing height for touchscreen*/
+	}
 
-button:active {
-  box-shadow: inset 2px 2px 2px rgba(0, 0, 0, .5), inset -2px -2px 2px rgba(0, 0, 0, .5);
-}
+	.unit-property, .line-graph-button-holder {
+		min-width: 50%;
+		padding: 5px 0 5px 5px; /*Scale*/
+		box-sizing: border-box;
+	}
 
-button:active div {
-  width: 123px;
-  height: 34px;
-  box-shadow: inset 2px 2px 2px rgba(255, 255, 255, .4);
-  position: absolute;
-  left: 2px;
-  top: 2px;
-}
+	.line-graph-button-holder button {
+		margin-left: 10px; /*Scale*/
+	}
 
-.pad-left {
-	width: 10%;
-}
+	/*Checkboxes and footer are already included from the first panel.*/
 
-.pad-left+.button-holder {
-	min-width: 40%;
-	padding-left: 32px;
-}
+/*Third panel: Charts*/
 
-.bar-graph-property-list {
-	border-bottom: 1px black solid;
-	box-sizing: border-box;
-	overflow: auto;
-}
+	.intro-instructions {
+		margin: 20px;
+	}
 
-.delete {
-	display: block;
-	position: absolute;
-	right: 17.5%;
-	top: 20px;
-}
+	.game-title {
+		text-decoration: underline;
+	}
 
-.hidden.hidden {
-	display: none;
-}
+	.charts-panel {
+		margin-left: 322px; /*Scale the 320*/
+		margin-right: 324px; /*Scale the 320*/
+	}
+
+	.large-graph-container {
+		width: 100%;
+		position: relative;
+	}
+
+	.delete {
+		display: block;
+		position: absolute;
+		right: 25%; /*Scale*/
+		top: 20px; /*Do not scale*/
+	}
+
+/*General utility*/
+
+	.flexbox {
+		display: flex;
+		justify-content: space-around;
+		align-items: flex-start;
+		flex-wrap: wrap;
+		align-content: flex-start;
+	}
+
+	.hidden.hidden { /*class repeated for specificity, to avoid order dependence*/
+		display: none;
+	}
