@@ -183,16 +183,24 @@ function drawGraphFromJSON(JSON, graphObject, colors) {
 	}
 	let dTable = new google.visualization.DataTable();
 	const ranges = JSON.valueRanges;
+	const chartPanelWidth = $(".graphs-panel").width();
+	if (chartPanelWidth > 480) {
+		var fontSize = 12;
+		var right = (chartPanelWidth * 0.175) + 36;
+	}
+	else {
+		var fontSize = chartPanelWidth/40;
+		var right = chartPanelWidth/4;
+	}
 	if (graphObject.isLineGraph) {
 		const options = {
 			title: ranges[1].values[0][0],
-			chartArea: {backgroundColor: "#BFBFBF", width: "65%", left: "10%"},
+			chartArea: {backgroundColor: "#BFBFBF", width: "65%", right: right},
 			hAxis: {title: ranges[0].values[0][0]},
 			interpolateNulls: true,
 			colors: [],
-			backgroundColor: "#E7EFF7",
-			fontSize: 12,
-
+			backgroundColor: "#D7DFE7",
+			fontSize: fontSize,
 		};
 		for (let i = 0; i < colors.length; ++i) {
 			options.colors[i] = colors[i];
@@ -220,9 +228,10 @@ function drawGraphFromJSON(JSON, graphObject, colors) {
 	}
 	else {
 		const options = {
-			chartArea: {backgroundColor: "#BFBFBF", width: "65%"},
+			chartArea: {backgroundColor: "#BFBFBF", width: "65%", right: right},
 			colors: [],
-			backgroundColor: "#E7EFF7",
+			backgroundColor: "#D7DFE7",
+			fontSize: fontSize
 		};
 		for (let i = 0; i < colors.length; ++i) {
 			options.colors[i] = colors[i];
@@ -262,7 +271,7 @@ function drawGraphFromJSON(JSON, graphObject, colors) {
 		graphObject.chart = chart;
 		chart.draw(dTable, options);
 	}
-	graphObject.container.children(".delete").removeClass("hidden");
+	graphObject.container.children(".delete").removeClass("hidden").css("right", right);
 }
 
 function getGraphData(graphObject) {
@@ -309,13 +318,13 @@ function createGraph(isLineGraph, units, properties, minXP, maxXP)  {
 		properties: properties,
 		minXP: minXP,
 		maxXP: maxXP,
-		container: $("<div class='large-graph-container'><div class='small-graph-container'></div><button class='delete hidden'>Delete Graph</button></div>")
+		container: $("<div class='large-graph-container'><div class='small-graph-container'></div><button class='delete hidden'><div></div>Delete Graph</button></div>")
 	};
 	newGraph.container.children(".delete").data("graphObject", newGraph);
 	addGraphToState(newGraph);
 	assignQueryObject(newGraph);
 	getGraphData(newGraph);
-	if (newGraph.container !== undefined) $(".charts-panel").append(newGraph.container);
+	if (newGraph.container !== undefined) $(".graphs-panel").append(newGraph.container);
 }
 
 function updateGraph (units) { //Graph object is this.
@@ -398,9 +407,21 @@ function activateButtons () {
 		function () {$(this).parent().toggleClass("closed-expandable");}
 	);
 	$("input[type=checkbox]").change(propagateCheckboxes);
-	$(".charts-panel").on("click", ".delete", function () {deleteGraph($(this).data("graphObject"));})
+	$(".graphs-panel").on("click", ".delete", function () {deleteGraph($(this).data("graphObject"));})
+	$(".tab").click (
+		function () {
+			$(".units-panel, .properties-panel, .graphs-panel, .mobile-intro").addClass("hidden-for-tabbed");
+			if ($(this).hasClass("for-2-tabs")) {
+				$(".units-panel").removeClass("hidden-for-tabbed");
+				$(".properties-panel").removeClass("hidden-for-tabbed");
+			}
+			else {
+				let target = $(this).data("target");
+				$(`.${target}-panel`).removeClass("hidden-for-tabbed");
+			}
+		}
+	)
 }
-
 function restoreIndeterminates () { //Needed for browsers that persist input values across refereshes
 	$(".level-2, .level-1").each (function () {
 		const myOwnBox = $(this).children("input[type=checkbox]");

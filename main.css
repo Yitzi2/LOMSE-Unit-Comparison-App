@@ -1,248 +1,253 @@
-/*Default is for 320-768px and assumes touchscreen.  Tabbed, with large buttons.*/
+/*Default is for 320-480px and assumes touchscreen.  Tabbed, with three tabs and large buttons.*/
 
+	/*Style to approximately match the game*/
 
-
-/*320 to 800 with mouse is tabbed, without large buttons.  
-IE, Firefox, and Opera Mini don't support pointer, so the 768/769 boundary for width is used as a substitute.*/
-@media (min-width: 769px), (pointer: fine); { 
-
-}
-
-/*If the browser can detect it's a touchscreen, use the default even if it's above 768px.*/
-@media (pointer: coarse) {
-
-}
-
-/*801 to 960px has 320px for the center panel, and scales the others to fit width.*/
-@media (min-width: 800px) {
-
-}
-
-/*Larger buttons, for large tablets.*/
-@media (min-width: 800px) and (pointer: coarse) {
-
-}
-
-/*961 to 1280px has 50% for the center panel and 25% for the side panels.*/
-@media (min-width: 960px) {
-
-}
-
-/*Some tablets are still that large*/
-@media (min-width: 960px) and (pointer: coarse) {
-
-}
-
-/*1280px and up has 320px for the side panels and the rest is the center.*/
-@media (min-width: 1280px) {
-
-}
-
-/*I don't think any tablets are that large, but it can't hurt to include it in case they come out with one.*/
-@media (min-width: 1280px) and (pointer: coarse) {
-
-}
-
-
-/*Everything below here needs to be transitioned*/
-
-/*Style to approximately match the game*/
-
-	* {
-		font-family: "Roboto";
-		font-variant: small-caps;
-		font-size: 12pt; /*Scale*/
-	}
-
-	p:not(.line):not(.unit-property) {
-		line-height: 150%;
-	}
-
-	html {
-		background-color: #E7EFF7;
-	}
-
-	.units-panel, .properties-panel {
-		background-color: #BFBFBF;
-	}
-
-	/*Button style*/
-
-	button
-	{
-	    width: 125px; /*Scale*/
-	    height: 36px; /*Scale and increase for touchscreen*/
-	    background-color: #BFBFBF;   
-	    border: 0;
-	    box-shadow: inset 2px 2px 2px rgba(255, 255, 255, .4), inset -2px -2px 2px rgba(0, 0, 0, .4);
-	    position: relative;
-	}
-
-	button:active {
-	  box-shadow: inset 2px 2px 2px rgba(0, 0, 0, .5), inset -2px -2px 2px rgba(0, 0, 0, .5);
-	}
-
-	button:active div {
-	  width: 123px; /*regular minus 2px*/
-	  height: 34px; /*regular minus 2px*/
-	  box-shadow: inset 2px 2px 2px rgba(255, 255, 255, .4);
-	  position: absolute;
-	  left: 2px;
-	  top: 2px;
-	}
-
-/*Set basic layout including scrolling, margins, and height. */
-
-	html {
-		overflow: hidden;
-	}
-
-	body {
-		margin: 0;
-	}
-
-	html, body, body>div, .units-form {
-		height: 100%;
-	}
-
-	.units-form, .bar-graph-form {
-		display: flex;
-		flex-direction: column;
-	}
-
-	.scrollable, .bar-graph-property-list {
-		overflow: auto;
-	}
-
-	.charts-panel { /*So that the width doesn't change when a scrollbar is added*/
-		overflow-y: scroll;
-	}
-
-
-/*Features unique to the tabbed version of the page*/
-
-	.tab {
-		display: none;  /*Changed to an appropriate size for tabbed*/
-	}
-
-	.mobile-intro {
-		display: none;
-	}
-
-/*First panel: Units*/
-
-	.units-panel {
-		width: 320px; /*Scale, use (sans border) as main scaling factor*/
-		border-right: 2px black solid;
-		box-sizing: border-box;
-		float: left;
-		margin-left: 0px;
-	}
-
-	.units-panel-main {
-		padding-bottom: 20px; /*Scale*/
-	}
-
-	p, .level-1 {
-		margin: 8px 5px 0 10px; /*Scale*/
-	}
-
-	/*Including the expandability feature and arrows*/
-
-		.arrow:before {
-			content: "\25BC";
-			font-size: 12pt; /*Do not scale, increase for touchscreen*/
+		*, h2 {
+			font-family: "Roboto";
+			font-variant: small-caps;
+			font-size: 12pt;
 		}
 
-		.arrow { /*Do not scale, increase for touchscreen*/
-			display: inline-block;
-			height: 20px;
-			width: 16px;
-			line-height: 20px;
-			padding-right: 4px; /*Do not increase for touchscreen*/
+		p:not(.line):not(.unit-property) {
+			line-height: 150%;
 		}
 
-		.closed-expandable .arrow:before {
-			content: "\25B6";
+		html, body, main, main>div, .units-form {
+			height: 100%;
 		}
 
-		.closed-expandable .expandable, .closed-expandable .line {
+		html, .tab.selected::before {
+			background-color: #D7DFE7;
+		}
+
+
+		/*Button style*/
+
+		button {
+		    width: 7.8125em;
+		    padding: 0;
+		    height: 40px;   
+		    border: 0;
+		    margin: 5px 0;
+		    box-shadow: inset 2px 2px 2px rgba(255, 255, 255, .5), inset -2px -2px 2px rgba(0, 0, 0, .5);
+		    position: relative;
+		    background-color: inherit;
+		}
+
+		button:active {
+			box-shadow: inset 2px 2px 2px rgba(0, 0, 0, .6), inset -2px -2px 2px rgba(0, 0, 0, .6);
+		}
+
+		button:active div {
+			width: 123px;
+			width: calc(7.8125em - 2px);
+			height: 38px;
+			box-shadow: inset 2px 2px 2px rgba(255, 255, 255, .5);
+			position: absolute;
+			left: 2px;
+			top: 2px;
+		}
+	/*Set basic layout including scrolling, margins, and height. */
+
+		html {
+			overflow: hidden;
+		}
+
+		body {
+			margin: 0;
+		}
+
+		.units-form, .bar-graph-form {
+			display: flex;
+			flex-direction: column;
+		}
+
+		.scrollable, .bar-graph-property-list {
+			overflow: auto;
+		}
+
+		.graphs-panel { /*So that the width doesn't change when a scrollbar is added*/
+			overflow-y: scroll;
+		}
+
+	/*Features unique to the tabbed version of the page*/
+
+		.tabs-block {
+			width: 100%;
+			overflow: hidden;
+		}
+
+
+		/*The border is rendered by a separate div because overflow: hidden is needed to make the block appear on top, 
+			but overflow:visible is needed so the active tab can cover up the border.*/
+		.tabs-block-border-renderer {
+			height: 1.875em;
+			border-bottom: 1px grey solid;
+		}
+
+		.tab {
+			display: block;
+			float: left;
+			position: relative;
+			padding: 0 1em 0 1em;
+			height: 1.875em;
+			line-height: 1.875em;
+			min-width: 3.125em;
+			text-align: center;
+			margin: 0 -7px 0 0;
+			cursor: default;
+		}
+
+		.tab::before {
+			content: "";
+			position: absolute;
+			top: -0.3125em; right: 0; bottom: 0; left: 0;
+			background-color: #BFBFBF;
+			border: 1px solid grey;
+			border-bottom: none;
+			z-index: -1;
+			border-radius: 0.625em 0.625em 0 0;
+			transform: perspective(0.625em) rotateX(2deg);
+			transform-origin: bottom;
+		}
+
+		.tab.selected {
+			z-index: 2;
+			border-bottom: 1px #D7DFE7 solid;
+		}
+
+		main { /*To make it be 100% of what's left after the tabs.*/
+			margin-top: -1.875em;
+			padding-top: 1.875em;
+			box-sizing: border-box;
+		}
+
+		.hidden-for-tabbed.hidden-for-tabbed { /*Doubled for extra specificity*/
 			display: none;
 		}
 
-	.level-2, .line {
-		margin: 8px 5px 0 20px; /*Scale, but left margin scales to arrow size*/
-	}
+		.for-2-tabs {
+			display: none;
+		}
 
-	input[type="checkbox"] {
-		margin-left: 0; /*Increase by half of arrow increase for touchscreen*/
-	}
+	/*First panel: Units*/
 
-	label {
-		/*For touchscreen, make inline block with padding on top and bottom.*/
-	}
+		.units-panel-pad-bottom {
+			height: 0.625em; /*Workaround because padding doesn't show properly with scrollbar in Firefox and IE*/
+		}
 
-	input[type="color"] {
-		width: 13px; /*Do not scale.  Increase for touchscreen*/
-		height: 13px; /*Do not scale.  Increase for touchscreen*/
-		padding: 0;
-		border: none;
-		margin-right: 3px; /*Scale, and increase for touchscreen*/
-	}
+		p {
+			margin: 0.5em 0.3125em 0 0.625em;
+		}
 
-	footer {
-		border-top: 1px black solid;
-		padding: 5px 0px; /*Scale*/
-	}
+		.level-1 {
+			margin-left: 0.1875em;
+			padding-right: 0.3125em;
+		}
 
-	.units-flex-padding-bottom {
-		flex: 1;
-	}
+		.level-2, .line {
+			margin-left: 26px;
+		}
 
+		/*Including the expandability feature and arrows*/
 
-/*Second panel: Properties*/
+			.arrow.arrow:before {
+				content: "\25BC";
+				font-size: 12pt;
+			}
 
-	.properties-panel {
-		width: 320px; /*Scale*/
-		box-sizing: border-box;
-		border-left: 2px black solid;
-		border-right: 2px black solid;
-		float: right;
-		margin-left: 0px;
-		display: flex;
-		flex-direction: column;
-	}
+			.arrow {
+				display: inline-block;
+				height: 20px;
+				width: 16px;
+				line-height: 20px;
+				padding: 10px 7px 10px 0.4375em;
+				margin: 5px 0;
+			}
 
-	.properties-panel h2 {
-		text-align: center;
-		margin: 0;
-		padding-top: 5px; /*Scale*/
-		padding-bottom: 0;
-		font-size: 12pt; /*Scale*/
-		font-weight: 700;
-	}
+			.closed-expandable .arrow:before {
+				content: "\25B6";
+			}
 
-	.line-graph-form {
-		border-top: 2px black solid;
-		border-bottom: 2px black solid;
-		box-sizing: border-box;
-	}
+			.closed-expandable .expandable, .closed-expandable .line {
+				display: none;
+			}
 
-	input[type="number"] {
-		width: 55px; /*Scale with panel size and consider increasing height for touchscreen*/
-	}
+		input[type="checkbox"], input[type="radio"] {
+			margin: 18.5px 3px;
+		}
 
-	.unit-property, .line-graph-button-holder {
-		min-width: 50%;
-		padding: 5px 0 5px 5px; /*Scale*/
-		box-sizing: border-box;
-	}
+		label {
+			display: inline-block;
+			height: 1.25em;
+			line-height: 1.25em;
+			padding: 10px 0;
+			padding: calc(20px - 0.5625em) 0;
+			margin: 5px 0;
+		}
 
-	.line-graph-button-holder button {
-		margin-left: 10px; /*Scale*/
-	}
+		input[type="color"] {
+			width: 13px;
+			height: 13px;
+			padding: 0;
+			border: none;
+			margin: 18.5px 7px 18.5px;
+			-webkit-appearance: none; /*So Chrome won't waste any of the space on the wrapper*/
+		}
 
-	/*Checkboxes and footer are already included from the first panel.*/
+		input[type="color"]::-webkit-color-swatch-wrapper {
+			padding: 0;
+		}
+		input[type="color"]::-webkit-color-swatch {
+			border: none;
+		}
+
+		footer {
+			border-top: 1px black solid;
+		}
+
+		.units-flex-padding-bottom {
+			flex: 1;
+		}
+
+		.unit-property, .line-graph-button-holder {
+			min-width: 50%;
+			padding: 0 0 0 0.125em;
+			box-sizing: border-box;
+		}
+
+	/*Second panel: Properties*/
+
+		.properties-panel {
+			box-sizing: border-box;
+			border: 2px black solid;
+			display: flex;
+			flex-direction: column;
+		}
+
+		.properties-panel h2 {
+			text-align: center;
+			margin: 0;
+			padding-top: 0.3125em; /*Scale*/
+			padding-bottom: 0;
+		}
+
+		.center {
+			text-align: center;
+		}
+
+		.line-graph-form {
+			border-bottom: 2px black solid;
+			box-sizing: border-box;
+		}
+
+		input[type="number"] {
+			width: 4em;
+		}
+
+		.line-graph-button-holder.line-graph-button-holder button {
+			margin-left: 9.5px;
+		}
 
 /*Third panel: Charts*/
 
@@ -250,13 +255,9 @@ IE, Firefox, and Opera Mini don't support pointer, so the 768/769 boundary for w
 		margin: 20px;
 	}
 
+
 	.game-title {
 		text-decoration: underline;
-	}
-
-	.charts-panel {
-		margin-left: 322px; /*Scale the 320*/
-		margin-right: 324px; /*Scale the 320*/
 	}
 
 	.large-graph-container {
@@ -267,8 +268,7 @@ IE, Firefox, and Opera Mini don't support pointer, so the 768/769 boundary for w
 	.delete {
 		display: block;
 		position: absolute;
-		right: 25%; /*Scale*/
-		top: 20px; /*Do not scale*/
+		top: 20px;  /*The value for right is set by javascript on creation, to allow for calculations even in Opera Mini.*/
 	}
 
 /*General utility*/
@@ -284,3 +284,254 @@ IE, Firefox, and Opera Mini don't support pointer, so the 768/769 boundary for w
 	.hidden.hidden { /*class repeated for specificity, to avoid order dependence*/
 		display: none;
 	}
+
+
+/*Use media queries to customize based on the device.
+
+480-800px is tabbed with two tabs: Units and properties are shown side by side.
+At 480-640px, scale factor is 1px->5vw/32, or 3/4 for Opera Mini.
+*/
+
+
+@media  (min-width: 480px) and (max-width: 800px) {
+
+	* {
+		font-size: 9pt;
+		font-size: calc(2.5vw); /*If a browser accepts vw but not calc, it's better for it to just use 3/4 scaling.*/
+	}
+
+	button:active div { /*non-calc version needs to be scaled to 9px.*/
+		width: 91.75px;
+	    width: calc(7.8125em - 2px);
+	}
+
+	.for-3-tabs {
+		display: none;
+	}
+	.for-2-tabs {
+		display: block;
+	}
+
+	.units-panel, .properties-panel {
+		width: 50%;
+	}
+
+	.units-panel {
+		float: left;
+	}
+
+	label {
+		padding: 12.5px 0;
+		padding: calc(20px - 0.5625em) 0;
+	}
+
+}
+
+/*320 to 800 with mouse instead of touchscreen is tabbed (2 or 3 respectively), without large buttons.    
+IE, Firefox, and Opera Mini don't support pointer, so the 768/769 boundary for width is used as a substitute.*/
+
+@media (min-width: 769px), (pointer: fine) {
+	button {
+	    height: 2.25em;
+	}
+
+	button:active div {
+		height: 34px;
+		height: calc(2.25em - 2px);
+	}
+
+	.level-2, .line {
+		margin-left: 20px;
+	}
+
+
+	.arrow {
+		padding: 0.0625em 1px 0.0625em 0.0625em;
+		margin: 0.25em 0 0.25em 0.375em;
+	}
+
+	input[type="checkbox"], input[type="color"], input[type="radio"] {
+		margin-top: 8.5px;
+		margin-top: calc(0.9375em - 6.5px);
+		margin-bottom: 8.5px;
+		margin-bottom: calc(0.9375em - 6.5px);
+	}
+
+	label {
+		padding: 0.0625em 0;
+		margin: 0.25em 0;
+	}
+
+	.line-graph-form button {
+		margin-top: -0.1875em
+	}
+
+}
+
+@media (min-width: 769px) and (max-width: 800px), (pointer: fine) and (min-width: 480px) and (max-width: 800px) { 
+
+	button:active div {
+		height: 25px;
+		height: calc(2.25em - 2px);
+	}
+
+	input[type="checkbox"], input[type="color"], input[type="radio"] {
+		margin-top: 4.75px;
+		margin-top: calc(0.9375em - 6.5px);
+		margin-bottom: 4.75px;
+		margin-bottom: calc(0.9375em - 6.5px);
+	}
+
+}
+
+/*If the browser can detect it's a touchscreen, use the default even if it's above 768px.*/
+@media (pointer: coarse) {
+	button {
+	    height: 40px;
+	}
+
+	button:active div {
+		height: 38px;
+	}
+
+	.level-2, .line {
+		margin-left: 26px;
+	}
+
+
+	.arrow {
+		padding: 10px 7px 10px 0.4375em;
+		margin: 5px 0;
+	}
+
+	input[type="checkbox"], input[type="color"], input[type="radio"] {
+		margin-top: 8.5px;
+		margin-top: calc(0.9375em - 6.5px);
+		margin-bottom: 8.5px;
+		margin-bottom: calc(0.9375em - 6.5px);
+	}
+
+	label {
+		padding: 10px 0;
+		padding: calc(20px - 0.5625em) 0;
+		margin: 5px 0;
+	}
+
+	.line-graph-form button {
+		margin-top: 5px
+	}
+
+}
+
+@media (pointer: coarse) and (min-width: 480) and (max-width: 800) { 
+	label {
+		padding: 12.5px 0;
+		padding: calc(20px - 0.5625em) 0;
+	}
+}
+
+/*800 to 1280px has side panels of width 320/3px plus 1/6 the screen, with the rest being the center panel.
+So scale factor is 1/3 plus 1px->5vw/96, or 3/4 for Opera Mini*/
+
+@media (min-width: 800px) and (max-width: 1280px) {
+	* {
+		font-size: 9pt;
+		font-size: calc(4pt + 5vw/6);
+	}
+
+	button:active div {
+		width: 91.75px;
+	    width: calc(7.8125em - 2px);
+	    height: 25px;
+	    height: calc(2.25em - 2px);
+	}
+
+	.units-panel, .properties-panel {
+		width: 20em;
+	}
+
+	input[type="checkbox"], input[type="color"], input[type="radio"] {
+		margin-top: 4.75px;
+		margin-top: calc(0.9375em - 6.5px);
+		margin-bottom: 4.75px;
+		margin-bottom: calc(0.9375em - 6.5px);
+	}
+
+	.graphs-panel {
+		margin-left: 20em;
+		margin-right: 20em;
+		margin-left: calc(20em + 2px);
+		margin-right: calc(20em + 4px);
+	}
+
+}
+
+/*For large tablets.*/
+@media (min-width: 800px) and (max-width: 1280px) and (pointer: coarse) {
+
+	button {
+	    height: 40px;
+	}
+
+	button:active div {
+		height: 38px;
+	}
+
+	label {
+		padding: 12.5px 0;
+		padding: calc(20px - 0.5625em) 0;
+	}
+}
+
+/*Some changes are purely a function of not using tabs, so apply at 800px and up.*/
+
+@media (min-width: 800px) {
+
+	.units-panel, .properties-panel { /*Without tabs, they're a different color than the charts page.*/
+		background-color: #BFBFBF;
+	}
+
+	.units-panel {
+		border-right: 2px black solid;
+		box-sizing: border-box;
+		float: left;
+	}
+
+	.properties-panel {
+		float: right;
+	}
+
+	.tabs-block {
+		display: none;
+	}
+
+	.mobile-intro.mobile-intro.mobile-intro {
+		display: none;
+	}
+
+	main {
+		margin-top: 0;
+		padding-top: 0;
+	}
+
+	.hidden-for-tabbed.hidden-for-tabbed {
+		display: block;
+	}
+
+	.hidden-for-tabbed.properties-panel {
+		display: flex;
+	}
+}
+
+/*1280px and up has 320px for the side panels and the rest is the center.*/
+@media (min-width: 1280px) {
+	.units-panel, .properties-panel {
+		width: 320px;
+	}
+
+}
+
+/*I don't think any tablets are that large, but it can't hurt to include it in case they come out with one.*/
+@media (min-width: 1280px) and (pointer: coarse) {
+
+}
