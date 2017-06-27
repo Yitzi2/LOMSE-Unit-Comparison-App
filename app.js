@@ -183,6 +183,8 @@ function drawGraphFromJSON(JSON, graphObject, colors) {
 	}
 	let dTable = new google.visualization.DataTable();
 	const ranges = JSON.valueRanges;
+	let graphsHidden = $(".graphs-panel").hasClass("hidden-for-tabbed");
+	$(".graphs-panel").removeClass("hidden-for-tabbed");
 	const chartPanelWidth = $(".graphs-panel").width();
 	if (chartPanelWidth > 480) {
 		var fontSize = 12;
@@ -272,6 +274,7 @@ function drawGraphFromJSON(JSON, graphObject, colors) {
 		chart.draw(dTable, options);
 	}
 	graphObject.container.children(".delete").removeClass("hidden").css("right", right);
+	if (graphsHidden) (".graphs-panel").addClass("hidden-for-tabbed");
 }
 
 function getGraphData(graphObject) {
