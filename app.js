@@ -194,19 +194,19 @@ function drawGraphFromJSON(JSON, graphObject, colors) {
 		var fontSize = chartPanelWidth/40;
 		var right = chartPanelWidth/4;
 	}
+	const options = {
+		chartArea: {backgroundColor: "#BFBFBF", width: "65%", right: right},
+		colors: [], //Added next
+		backgroundColor: "#D7DFE7",
+		fontSize: fontSize
+	}
+	for (let i = 0; i < colors.length; ++i) {
+		options.colors[i] = colors[i];
+	}
 	if (graphObject.isLineGraph) {
-		const options = {
-			title: ranges[1].values[0][0],
-			chartArea: {backgroundColor: "#BFBFBF", width: "65%", right: right},
-			hAxis: {title: ranges[0].values[0][0]},
-			interpolateNulls: true,
-			colors: [],
-			backgroundColor: "#D7DFE7",
-			fontSize: fontSize,
-		};
-		for (let i = 0; i < colors.length; ++i) {
-			options.colors[i] = colors[i];
-		}
+		options.title = ranges[1].values[0][0];
+		options.hAxis = {title: ranges[0].values[0][0]};
+		options.interpolateNulls = true;
 		dTable.addColumn("number");
 		for (let i = 1; 2*i < ranges.length; ++i) {
 			dTable.addColumn("number", ranges[2*i].values[0][1]); //Label is unit name
@@ -229,15 +229,6 @@ function drawGraphFromJSON(JSON, graphObject, colors) {
 		$(".intro-instructions").detach();
 	}
 	else {
-		const options = {
-			chartArea: {backgroundColor: "#BFBFBF", width: "65%", right: right},
-			colors: [],
-			backgroundColor: "#D7DFE7",
-			fontSize: fontSize
-		};
-		for (let i = 0; i < colors.length; ++i) {
-			options.colors[i] = colors[i];
-		}
 		const numberOfProperties = graphObject.properties.length;
 		if (graphObject.minXP != 0) options.title = "At " + graphObject.minXP + " XP";
 		if (numberOfProperties > 1) options.hAxis = {title: "Property"};
@@ -336,7 +327,7 @@ function updateGraph (units) { //Graph object is this.
 	getGraphData(this);
 }
 
-function propagateCheckboxes () {
+function propagateCheckboxes () { //So that a category is checked iff all its members are, and indeterminate if some of its members are checked.
 	let category = $(this).closest(".level-2");
 	let categoryBox = category.children("input[type=checkbox]");
 	let otherBoxes = category.find("input[type=checkbox]").not(categoryBox);

@@ -12,7 +12,7 @@
 			line-height: 150%;
 		}
 
-		html, body, main, main>div, .units-form {
+		html, body, main, .units-panel, .properties-panel, .units-form {
 			height: 100%;
 		}
 
@@ -133,11 +133,13 @@
 
 	/*First panel: Units*/
 
-		.units-panel-pad-bottom {
-			height: 0.625em; /*Workaround because padding doesn't show properly with scrollbar in Firefox and IE*/
+		ul {
+			list-style: none;
+			padding: 0;
+			margin: 0;
 		}
 
-		p {
+		p, .line {
 			margin: 0.5em 0.3125em 0 0.625em;
 		}
 
@@ -201,6 +203,10 @@
 		}
 		input[type="color"]::-webkit-color-swatch {
 			border: none;
+		}
+
+		.units-panel-pad-bottom {
+			height: 0.625em; /*Workaround because padding doesn't show properly with scrollbar in Firefox and IE*/
 		}
 
 		footer {
