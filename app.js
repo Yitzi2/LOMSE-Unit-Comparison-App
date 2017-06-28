@@ -177,7 +177,7 @@ function preventOverlap (dTable, heightPerPoint) {
 
 function drawGraphFromJSON(JSON, graphObject, colors) {
 	if (checkChartsReady() === false) {
-		alert ("Please wait for Google Charts to be loaded, and try again");
+		alert ("Please wait for Google Charts to be loaded and try again.  Reloading the page may help as well.");
 		deleteGraph(graphObject);
 		return false;
 	}
@@ -404,6 +404,8 @@ function activateButtons () {
 	$(".graphs-panel").on("click", ".delete", function () {deleteGraph($(this).data("graphObject"));})
 	$(".tab").click (
 		function () {
+			$(".tab").removeClass("selected");
+			$(this).addClass("selected");
 			$(".units-panel, .properties-panel, .graphs-panel, .mobile-intro").addClass("hidden-for-tabbed");
 			if ($(this).hasClass("for-2-tabs")) {
 				$(".units-panel").removeClass("hidden-for-tabbed");
@@ -415,6 +417,9 @@ function activateButtons () {
 			}
 		}
 	)
+	$("input[type=radio]").change(
+		function () {$(".line-graph-form").scrollTop(300)}
+	)
 }
 function restoreIndeterminates () { //Needed for browsers that persist input values across refereshes
 	$(".level-2, .level-1").each (function () {
@@ -424,4 +429,4 @@ function restoreIndeterminates () { //Needed for browsers that persist input val
 	});
 }
 
-$(function () {restoreIndeterminates();activateButtons();});
+$(function () {restoreIndeterminates();activateButtons()});
