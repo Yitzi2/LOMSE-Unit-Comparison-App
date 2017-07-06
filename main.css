@@ -9,7 +9,8 @@
 		}
 
 		p:not(.line):not(.unit-property) {
-			line-height: 150%;
+			line-height: 200%;
+			padding: 2px 0;
 		}
 
 		html, body, main, .units-panel, .properties-panel, .graphs-panel, .units-form {
@@ -209,6 +210,8 @@
 
 		footer {
 			border-top: 1px black solid;
+			padding-top: 2px;
+			padding-bottom: 2px;
 		}
 
 		.unit-property, .line-graph-button-holder {

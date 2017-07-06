@@ -292,7 +292,7 @@ function createGraph(isLineGraph, units, properties, minXP, maxXP)  {
 	//units and properties are jquery objects. maxXP is only used when isLineGraph===true
 	if (units.length===0) {
 		alert ("Please select one or more units.");
-		return false;
+		return false; //Return value is not used currently.
 	}
 	if (properties.length===0) {
 		alert ("Please select one or more properties.");
@@ -319,6 +319,7 @@ function createGraph(isLineGraph, units, properties, minXP, maxXP)  {
 	assignQueryObject(newGraph);
 	getGraphData(newGraph);
 	if (newGraph.container !== undefined) $(".graphs-panel").append(newGraph.container);
+	else return false;
 }
 
 function updateGraph (units) { //Graph object is this.
