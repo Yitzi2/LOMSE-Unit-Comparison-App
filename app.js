@@ -226,7 +226,6 @@ function drawGraphFromJSON(JSON, graphObject, colors) {
 		const chart = new google.visualization.LineChart(graphObject.container.children(".small-graph-container")[0]);
 		graphObject.chart = chart;
 		chart.draw(dTable, options);
-		$(".intro-instructions").detach();
 	}
 	else {
 		const numberOfProperties = graphObject.properties.length;
@@ -266,6 +265,7 @@ function drawGraphFromJSON(JSON, graphObject, colors) {
 	}
 	graphObject.container.children(".delete").removeClass("hidden").css("right", right);
 	if (graphsHidden) (".graphs-panel").addClass("hidden-for-tabbed");
+	$(".intro-instructions").detach();
 }
 
 function getGraphData(graphObject) {
