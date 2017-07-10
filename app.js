@@ -264,7 +264,8 @@ function drawGraphFromJSON(JSON, graphObject, colors) {
 		chart.draw(dTable, options);
 	}
 	graphObject.container.children(".delete").removeClass("hidden").css("right", right);
-	if (graphsHidden) (".graphs-panel").addClass("hidden-for-tabbed");
+	if (graphsHidden) $(".graphs-panel").addClass("hidden-for-tabbed");
+	console.log("foo");
 	$(".intro-instructions").detach();
 }
 
